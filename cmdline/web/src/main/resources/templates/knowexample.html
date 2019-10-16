@@ -1,0 +1,125 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>ETF Tracking</title>
+    
+    <!--- Libs Jquery -->
+    <script type="text/javascript" src="../static/vendor/modernizr-2.8.3.min.js" th:src="@{/vendor/modernizr-2.8.3.min.js}"></script>   
+    <script src="../static/vendor/jquery-1.12.4.js" th:src="@{/vendor/jquery-1.12.4.js}"></script>
+    <script src="../static/vendor/jqueryui-1.12.1.js" th:src="@{/vendor/jqueryui-1.12.1.js}"></script>
+    
+    <!--- Libs Semantic -->
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script> 
+    
+    <!--- Libs Datatables -->
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.js" th:src="@{/datatables/js/datatables-1.10.15.js}"></script>
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.semanticui.min.js" th:src="@{/datatables/js/datatables-1.10.15.semanticui.min.js}"></script>
+    
+    <!--- Libs Components -->
+    
+    <!--- CSS Semantic -->
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/semantic.css" th:href="@{semantic/dist/semantic.css}" media="screen" />
+
+    <!--- CSS Datatables -->
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.css" th:href="@{/datatables/css/datatables-1.10.15.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.semanticui.min.css" th:href="@{/datatables/css/datatables-1.10.15.semanticui.min.css}" media="screen" />
+    
+    <!--- CSS Components -->
+    <style>
+        body {
+            padding: 1em;
+        }
+        .spaced > .button {
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 7em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+    </style>        
+        
+</head>
+
+<body>
+
+    <nav class="ui fixed menu inverted navbar">
+        <a href="" class="brand item">Project Name</a>
+        <a href="" class="active item">Home</a>
+        <a href="" class="item">Features</a>
+        <a href="" class="item">Contact</a>
+    </nav> <!-- end nav -->
+
+    <div class="ui main container">
+    
+<!-- Title and search box -->
+<header class='jumbotron'>
+  <h1 class='title'>Calaca</h1>
+  <div class='search-box-container'>
+    <input type='text' class='search-box' placeholder='Search' autofocus ng-model='query' ng-change='delayedSearch(0)'>
+  </div>
+</header>
+
+<!-- Listing of search results -->
+<main class='results-container' ng-cloak>
+  <section class='results-info'>
+    <p id='response-details'>{{(hits | number) || 0}} {{resultsLabel || 'results'}} ({{(timeTook || 0)}}ms)</p>
+    <p ng-show='paginationEnabled()' id='pagination-details'>Showing {{paginationLowerBound}} - {{paginationUpperBound}}</p>
+  </section>
+  <section class='results'>
+    <p class='no-results' ng-show='!results.length && !loading'>No Results</p>
+    <article class='result' ng-repeat='result in results track by $id(result)'>
+      <h2>{{result.name}}</h2>
+      <p>{{result.description}}</p>
+    </article>
+  </section>
+  <section class='pagination-controls'>
+    <button ng-click='search(-1)' ng-show='paginationEnabled() && offset !== 0' class='pager'>Previous</button><button ng-click='search(1)' ng-show='paginationEnabled()' class='pager'>Next</button>
+  </section>
+</main>
+
+    </div>
+    
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var know_list = [[${know_list}]];
+        /*]]>*/
+    </script>
+    
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                 "scrollY":        "400px",
+                "scrollCollapse": true,
+                "pageLength":        100,
+                "paging":         true
+             } );
+        } );
+
+    </script>
+
+</body>
+
+</html>
+

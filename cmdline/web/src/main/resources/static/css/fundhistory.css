@@ -1,0 +1,15 @@
+#historyChart
+{
+    width: 960px;
+    height: 600px;
+    float: left;
+}
+#historyLegend
+{
+    float: left;
+}
+
+#historyZoom
+{
+    clear: left;
+}

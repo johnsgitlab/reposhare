@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<modelVersion>4.0.0</modelVersion>
+
+<groupId>com.jpw.raptor.jdbc</groupId>
+<artifactId>jdbc</artifactId>
+<packaging>jar</packaging>
+<version>1.0-SNAPSHOT</version>
+
+<parent>
+<groupId>com.jpw.raptor</groupId>
+<artifactId>raptor</artifactId>
+<version>1.0-SNAPSHOT</version>
+</parent>
+
+<properties>
+</properties>
+
+<modules>
+</modules>
+    
+<dependencies>
+
+<!-- Springboot test -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-test</artifactId>
+<version>${spring.boot.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- Junit -->
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>${junit.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- logging -->
+<dependency>
+<groupId>org.slf4j</groupId>
+<artifactId>slf4j-api</artifactId>
+<version>${slf4j-api.version}</version>
+</dependency>
+
+<!-- springboot jdbc exclude the default Tomcat connection pool -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-jdbc</artifactId>
+<exclusions>
+<exclusion>
+<groupId>org.apache.tomcat</groupId>
+<artifactId>tomcat-jdbc</artifactId>
+</exclusion>
+</exclusions>
+</dependency>
+
+<!-- Data structures -->
+<dependency>
+<groupId>com.jpw.raptor.model</groupId>
+<artifactId>model</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+
+<!-- HikariCP connection pool management  -->
+<dependency>
+<groupId>com.zaxxer</groupId>
+<artifactId>HikariCP</artifactId>
+<version>2.6.1</version>
+</dependency>
+
+<!-- Postgres JDBC driver -->
+<dependency>
+<groupId>org.jumpmind.symmetric.jdbc</groupId>
+<artifactId>postgresql</artifactId>
+<version>9.2-1002-jdbc4</version>
+</dependency>
+
+<!-- Postgres containers for Database testing -->
+<dependency>
+<groupId>org.testcontainers</groupId>
+<artifactId>testcontainers</artifactId>
+<version>${org.testcontainers.testcontainers.versions}</version>
+</dependency>
+<dependency>
+<groupId>org.testcontainers</groupId>
+<artifactId>postgresql </artifactId>
+<version>${org.testcontainers.postgresql.versions}</version>
+</dependency>
+
+<!-- Apache commons math library -->
+<dependency>
+<groupId>org.apache.commons</groupId>
+<artifactId>commons-math3</artifactId>
+<version>${commons.math3.version}</version>
+</dependency>
+
+<!-- GSON -->
+<dependency>
+<groupId>com.google.code.gson</groupId>
+<artifactId>gson</artifactId>
+<version>${gson.version}</version>
+</dependency>
+
+<!-- Lombok -->
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>${lombok.version}</version>
+<scope>provided</scope>
+</dependency>
+
+</dependencies>
+
+<build>
+<plugins>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+<version>${maven.compiler.version}</version>
+</plugin>
+
+
+</plugins>
+</build>
+
+</project>
+

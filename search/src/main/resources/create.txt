@@ -1,0 +1,34 @@
+
+#
+# Delete index
+#
+curl -X DELETE 'http://localhost:9200/raptor' 
+
+#
+# Create index raptor
+#
+curl -X PUT 'http://localhost:9200/raptor?pretty' \
+-H 'Content-Type: application/json' \
+-d '{"settings" : {"index" : {"number_of_shards" : 1, "number_of_replicas" : 0 } } }'
+
+#
+# list indexes
+#
+curl -X GET 'http://localhost:9200/_cat/indices?v'
+
+
+#
+# create document type finance with three fields (in index raptor)
+#
+curl -X PUT 'http://localhost:9200/raptor/_mapping/finance' \
+-H 'Content-Type: application/json' \
+-d '{"properties":{ "loc":{"type":"text","index":"false"}, "url":{"type":"text","index":"false"}, "title":{"type":"text","analyzer":"english","boost":2}, "tag":{"type":"text","analyzer":"english","boost":2,"position_increment_gap":100},  "body":{"type":"text","analyzer":"english","position_increment_gap":100} } }'
+
+
+#
+# list document mapping  (in index raptor)
+#
+curl -X GET 'http://localhost:9200/raptor/_mapping/finance'
+
+
+

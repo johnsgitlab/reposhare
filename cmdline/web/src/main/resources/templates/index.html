@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>MyTabName</title>
+   
+
+    <!-- Site Properties -->
+    
+
+    <!--- Site CSS -->
+
+
+    <!--- Component CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/button.css" th:href="@{semantic/dist/components/button.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/container.css" th:href="@{semantic/dist/components/container.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/divider.css"  th:href="@{semantic/dist/components/divider.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/dropdown.css" th:href="@{semantic/dist/components/dropdown.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/grid.css" th:href="@{semantic/dist/components/grid.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/header.css" th:href="@{semantic/dist/components/header.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/header.css" th:href="@{semantic/dist/components/header.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/list.css" th:href="@{semantic/dist/components/list.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/icon.css" th:href="@{semantic/dist/components/icon.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/input.css" th:href="@{semantic/dist/components/input.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/menu.css" th:href="@{semantic/dist/components/menu.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/popup.css" th:href="@{semantic/dist/components/popup.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/reset.css" th:href="@{semantic/dist/components/reset.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/segment.css" th:href="@{semantic/dist/components/segment.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/site.css" th:href="@{semantic/dist/components/site.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/transition.css" th:href="@{semantic/dist/components/transition.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery-ui.css" th:src="@{/css/jquery-ui.css}" media="screen" />
+
+    <!--- Libs -->
+    <script src="../static/vendor/jquery.min.js" th:src="@{/vendor/jquery.min.js}"></script>
+    <script src="../static/vendor/jquery-ui.min.js" th:src="@{/vendor/jquery-ui.min.js}"></script>
+    <script src="../static/semantic/assets/library/iframe-content.js" th:src="@{/semantic/assets/library/iframe-content.js}"></script>
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script> 
+
+    <!--- Component JS -->
+    <script type="text/javascript" src="../static/semantic/dist/components/popup.js" th:src="@{/semantic/dist/components/popup.js}"></script>
+    <script type="text/javascript" src="../static/semantic/dist/components/transition.js" th:src="@{/semantic/dist/components/transition.js}"></script>
+    <script type="text/javascript" src="../static/semantic/dist/components/dropdown.js" th:src="@{/semantic/dist/components/dropdown.js}"></script>
+
+    <!--- Example CSS -->
+    <style>
+        body {
+            margin: 2em 5em;
+             font-family:Georgia, "Times New Roman", Times, serif;
+             background-color: #FFFFFF;
+        }
+        .spaced > .button {
+            margin-bottom: 1em;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 7em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+        
+        fieldset {
+             margin-top: 1em;
+             margin-bottom: 2em;
+        }
+        
+        input[type=text], select, textarea{
+            display: inline-block;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=submit] {
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+  
+        div {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        input:invalid+span:after {
+            content: '✖';
+            padding-left: 5px;
+        }
+
+        input:valid+span:after {
+            content: '✓';
+            padding-left: 5px;
+        }
+        
+    </style>
+    
+    
+    <!--- Example Javascript -->
+    <script>
+        $(document)
+                .ready(function() {
+                    $('.ui.dropdown').dropdown();
+
+                    $('.ui.buttons .dropdown.button').dropdown({
+                        action: 'combo'
+                    });
+                })
+        ;
+    </script>
+
+    
+    <script type="text/javascript">
+        function ExampleJS(){
+            var jSearchvalue = document.getElementById("searchtext").value;
+            var jSearch = document.getElementById("searchtype").value;
+            if (jSearch === "etf") {
+                window.open('/etfdetail?symbol='+jSearchValue,'_blank');
+            } else if (jSearch === "fund") {
+                alert("Search for fund is: " + jSearchValue);
+            } else {
+                alert("Search for index is: " + jSearchValue);
+            }
+            //window.open('/index','_blank');
+        }
+    </script>
+
+    
+    <style type="text/css">
+
+  </style>
+
+</head>
+
+<body>
+
+    <div class="ui inverted fixed  menu">
+        <div class="ui container">
+
+            <a href="javascript:alert('Falcon Icon Selected');" class="header item">
+                <img class="logo" src="../static/images/falcon.png" th:src="@{/images/falcon.png}"/>
+                Raptor Financials - Version 6.0
+            </a>
+
+            <div class="ui simple dropdown item">
+                Indexes
+                <i class="dropdown icon"></i>
+                <div class="menu">
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Sector
+                        <div class="menu">
+                            <a class="item" href="/indexes-performance?symbol=IXY">Consumer Discretionary</a>
+                            <a class="item" href="/indexes-performance?symbol=IXR">Consumer Staples</a>
+                            <a class="item" href="/indexes-performance?symbol=IXE">Energy</a>
+                            <a class="item" href="/indexes-performance?symbol=IXM">Financial</a>
+                            <a class="item" href="/indexes-performance?symbol=IXV">Healthcare</a>
+                            <a class="item" href="/indexes-performance?symbol=IXI">Industrial</a>
+                            <a class="item" href="/indexes-performance?symbol=IXT">Technology</a>
+                            <a class="item" href="/indexes-performance?symbol=IXB">Materials</a>
+                            <a class="item" href="/indexes-performance?symbol=IXU">Utilities</a>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        NYSE
+                        <div class="menu">
+                            <a class="item" href="/indexes-performance?symbol=NYA">Composite</a>
+                            <a class="item" href="/indexes-data?symbol=HIGN">New Highs</a>
+                            <a class="item" href="/indexes-data?symbol=LOWN">New Lows</a>
+                            <a class="item" href="/indexes-data?symbol=ADDN">Advance Decline Difference</a>
+                            <a class="item" href="/indexes-data?symbol=ADRN">Advance Decline Ratio</a>
+                            <a class="item" href="/indexes-data?symbol=AVRN">Advance Decline Volume Ratio</a>
+                            <a class="item" href="/indexes-datalog?symbol=TRIN">Trin</a>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Nasdaq
+                        <div class="menu">
+                            <a class="item" href="/indexes-performance?symbol=COMP">Composite</a>
+                            <a class="item" href="/indexes-data?symbol=HIGQ">New Highs</a>
+                            <a class="item" href="/indexes-data?symbol=LOWQ">New Lows</a>
+                            <a class="item" href="/indexes-data?symbol=ADDQ">Advance Decline Difference</a>
+                            <a class="item" href="/indexes-data?symbol=ADRQ">Advance Decline Ratio</a>
+                            <a class="item" href="/indexes-data?symbol=AVRQ">Advance Decline Volume Ratio</a>
+                            <a class="item" href="/indexes-datalog?symbol=TRIQ">Trin</a>
+                        </div>
+                    </div>
+                      
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        SP/DJ/VIX
+                        <div class="menu">
+                            <a class="item" href="/indexes-data?symbol=VIX">VIX</a>
+                            <a class="item" href="/indexes-performance?symbol=SPX">SP 500</a>
+                            <a class="item" href="/indexes-performance?symbol=IVX">SP 500 Value</a>
+                            <a class="item" href="/indexes-performance?symbol=SGX">SP 500 Growth</a>
+                            <a class="item" href="/indexes-performance?symbol=DJC">DJ Composite</a>
+                            <a class="item" href="/indexes-performance?symbol=DJI">DJ Industrial</a>
+                            <a class="item" href="/indexes-performance?symbol=DJT">DJ Transport</a>
+                            <a class="item" href="/indexes-performance?symbol=DJU">DJ Utility</a>
+                        </div>
+                    </div>
+                          
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Commodities
+                        <div class="menu">
+                            <a class="item" href="/indexes-performance?symbol=DXY">Dollar</a>
+                            <a class="item" href="/indexes-performance?symbol=GLD">Gold</a>
+                            <a class="item" href="/indexes-performance?symbol=SLV">Silver</a>
+                            <a class="item" href="/indexes-performance?symbol=SPIN">Platinum</a>
+                        </div>
+                    </div>
+                      
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Treasuries
+                        <div class="menu">
+                            <a class="item" href="/indexes-performance?symbol=IRX">13 Week</a>
+                            <a class="item" href="/indexes-performance?symbol=FVX">5 Year</a>
+                            <a class="item" href="/indexes-performance?symbol=TNX">10 Year</a>
+                            <a class="item" href="/indexes-performance?symbol=TYX">30 Year</a>
+                            <a class="item" href="/treasury3-30">3 - 30</a>
+                            <a class="item" href="/treasury-short">Short Term</a>
+                            <a class="item" href="/treasury-long">Long Term</a>
+                        </div>
+                    </div>
+                </div>
+                  
+            </div>
+
+            <div class="ui simple dropdown item">
+                Exchange Traded Funds
+                <i class="dropdown icon"></i>
+                <div class="menu">
+    
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        List
+                        <div class="menu">
+                            <a class="item" href="/etf-list-owned">Owned</a>
+                            <a class="item" href="/etf-list-tracked">Tracked</a>
+                            <a class="item" href="/etf-list-relevant">Relevant</a>
+                            <a class="item" href="/etf-list-all">All</a>
+                            <a class="item" href="/etf-list-factors-all">Factors</a>
+                            <a class="item" href="/etf-list-domestic-factors-all">Domestic Factors</a>
+                            <a class="item" href="/etf-list-by-symbol?file=overview.txt&title=Overview">Overview</a>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Summary
+                        <div class="menu">
+                            <a class="item" href="/etf-summary-all">all</a>
+                            <a class="item" href="/etf-summary-subtype?class=domestic">domestic</a>
+                            <a class="item" href="/etf-summary-type?class=allocation">allocation</a>
+                            <a class="item" href="/etf-summary-subtype?class=international">international</a>
+                            <a class="item" href="/etf-summary-type?class=country">country</a>
+                            <a class="item" href="/etf-summary-subtype?class=bond">bond</a>
+                            <a class="item" href="/etf-summary-type?class=alternative">alternative</a>
+                            <a class="item" href="/etf-summary-type?class=currency">currency</a>
+                            <a class="item" href="/etf-summary-type?class=commodity">commodity</a>
+                            <a class="item" href="/etf-summary-type?class=sector">sector</a>
+                            <a class="item" href="/etf-summary-factor?class=domestic">factor</a>
+                            <a class="item" href="/etf-summary-type?class=futures">futures</a>
+                        </div>
+                    </div>
+                          
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Quarterly
+                        <div class="menu">
+                            <a class="item" href="/etf-return-class?class=domestic">domestic</a>
+                            <a class="item" href="/etf-return-class?class=allocation">allocation</a>
+                            <a class="item" href="/etf-return-class?class=international">international</a>
+                            <a class="item" href="/etf-return-class?class=country">country</a>
+                            <a class="item" href="/etf-return-class?class=bond">bond</a>
+                            <a class="item" href="/etf-return-class?class=alternative">alternative</a>
+                            <a class="item" href="/etf-return-class?class=currency">currency</a>
+                            <a class="item" href="/etf-return-class?class=commodity">commodity</a>
+                            <a class="item" href="/etf-return-class?class=sector">sector</a>
+                            <a class="item" href="/etf-return-tracked">Tracked</a>
+                            <a class="item" href="/etf-return-relevant">Relevant</a>
+                            <a class="item" href="/etf-return-owned">Owned</a>
+                        </div>
+                    </div>
+                      
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Signals
+                        <div class="menu">
+                            <a class="item" href="/etf-signal-class?class=domestic">domestic</a>
+                            <a class="item" href="/etf-signal-class?class=allocation">allocation</a>
+                            <a class="item" href="/etf-signal-class?class=international">international</a>
+                            <a class="item" href="/etf-signal-class?class=country">country</a>
+                            <a class="item" href="/etf-signal-class?class=bond">bond</a>
+                            <a class="item" href="/etf-signal-class?class=alternative">alternative</a>
+                            <a class="item" href="/etf-signal-class?class=currency">currency</a>
+                            <a class="item" href="/etf-signal-class?class=commodity">commodity</a>
+                            <a class="item" href="/etf-signal-class?class=sector">sector</a>
+                            <a class="item" href="/etf-signal-tracked">Tracked</a>
+                            <a class="item" href="/etf-signal-relevant">Relevant</a>
+                            <a class="item" href="/etf-signal-owned">Owned</a>
+                        </div>
+                    </div>
+                      
+                </div>
+            </div>
+
+            <div class="ui simple dropdown item">
+                Mutual Funds
+                <i class="dropdown icon"></i>
+                <div class="menu">
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        List
+                        <div class="menu">
+                            <a class="item" href="/mf-list-owned">Owned</a>
+                            <a class="item" href="/mf-list-tracked">Tracked</a>
+                            <a class="item" href="/mf-list-relevant">Relevant</a>
+                            <a class="item" href="/mf-list-all">All</a>
+                        </div>
+                    </div>
+    
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Summary
+                        <div class="menu">
+                            <a class="item" href="/mf-summary-all">all</a>
+                            <a class="item" href="/mf-summary-subtype?class=domestic">domestic</a>
+                            <a class="item" href="/mf-summary-type?class=allocation">allocation</a>
+                            <a class="item" href="/mf-summary-subtype?class=international">international</a>
+                            <a class="item" href="/mf-summary-type?class=country">country</a>
+                            <a class="item" href="/mf-summary-subtype?class=bond">bond</a>
+                            <a class="item" href="/mf-summary-type?class=alternative">alternative</a>
+                            <a class="item" href="/mf-summary-type?class=currency">currency</a>
+                            <a class="item" href="/mf-summary-type?class=commodity">commodity</a>
+                            <a class="item" href="/mf-summary-type?class=sector">sector</a>
+                            <a class="item" href="/mf-summary-factor?class=domestic">factor</a>
+                        </div>
+                    </div>
+                      
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Quarterly
+                        <div class="menu">
+                            <a class="item" href="/mf-return-class?class=domestic">domestic</a>
+                            <a class="item" href="/mf-return-class?class=allocation">allocation</a>
+                            <a class="item" href="/mf-return-class?class=international">international</a>
+                            <a class="item" href="/mf-return-class?class=country">country</a>
+                            <a class="item" href="/mf-return-class?class=bond">bond</a>
+                            <a class="item" href="/mf-return-class?class=alternative">alternative</a>
+                            <a class="item" href="/mf-return-class?class=currency">currency</a>
+                            <a class="item" href="/mf-return-class?class=commodity">commodity</a>
+                            <a class="item" href="/mf-return-class?class=sector">sector</a>
+                            <a class="item" href="/mf-return-owned">Owned</a>
+                            <a class="item" href="/mf-return-tracked">Tracked</a>
+                            <a class="item" href="/mf-return-relevant">Relevant</a>
+                        </div>
+                    </div>
+                      
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Signals
+                        <div class="menu">
+                            <a class="item" href="/mf-signal-class?class=domestic">domestic</a>
+                            <a class="item" href="/mf-signal-class?class=allocation">allocation</a>
+                            <a class="item" href="/mf-signal-class?class=international">international</a>
+                            <a class="item" href="/mf-signal-class?class=country">country</a>
+                            <a class="item" href="/mf-signal-class?class=bond">bond</a>
+                            <a class="item" href="/mf-signal-class?class=alternative">alternative</a>
+                            <a class="item" href="/mf-signal-class?class=currency">currency</a>
+                            <a class="item" href="/mf-signal-class?class=commodity">commodity</a>
+                            <a class="item" href="/mf-signal-class?class=sector">sector</a>
+                            <a class="item" href="/mf-signal-owned">Owned</a>
+                            <a class="item" href="/mf-signal-tracked">Tracked</a>
+                            <a class="item" href="/mf-signal-relevant">Relevant</a>
+                        </div>
+                    </div>
+                      
+                </div>
+            </div>
+
+            <div class="ui simple dropdown item">
+                Stocks
+                <i class="dropdown icon"></i>
+                <div class="menu">
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        List
+                        <div class="menu">
+                            <a class="item" href="/stock-list-owned">Owned</a>
+                            <a class="item" href="/stock-list-tracked">Tracked</a>
+                            <a class="item" href="/stock-list-relevant">Relevant</a>
+                            <a class="item" href="/stock-list-all">All</a>
+                            <a class="item" href="/stock-list-sp?index=400">SP 400</a>
+                            <a class="item" href="/stock-list-sp?index=500">SP 500</a>
+                            <a class="item" href="/stock-list-sp?index=600">SP 600</a>
+                            <a class="item" href="/stock-list-dow?index=industrial">Dow Industrial</a>
+                            <a class="item" href="/stock-list-dow?index=utility">Dow Utility</a>
+                            <a class="item" href="/stock-list-dow?index=transport">Dow Transport</a>
+                            <a class="item" href="/stock-list-russell?index=1000">Russell 1000</a>
+                            <a class="item" href="/stock-list-russell?index=2000">Russell 2000</a>
+                        </div>
+                    </div>
+    
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Summary
+                        <div class="menu">
+                            <a class="item" href="/stock-summary-sector">Sector</a>
+                            <a class="item" href="/stock-summary-industry">Industry</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui simple dropdown item">
+                All Equities
+                <i class="dropdown icon"></i>
+                <div class="menu">
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        List
+                        <div class="menu">
+                            <a class="item" href="/equity-list-by-symbol?file=own.txt&title=Own">Own</a>
+                            <a class="item" href="/equity-list-by-symbol?file=overview.txt&title=Overview">Overview</a>
+                            <a class="item" href="/equity-list-by-symbol?file=query.txt&title=Query">Query</a>
+                            <a class="item" href="/equity-list-by-symbol?file=stocks.txt&title=Stocks">Stocks</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="ui simple dropdown item">
+                Component Stocks
+                <i class="dropdown icon"></i>
+                <div class="menu">
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        List
+                        <div class="menu">
+                            <a class="item" href="/equity-list-by-symbol?file=dividend-stocks.txt&title=Dividend">Dividend</a>
+                            <a class="item" href="/equity-list-by-symbol?file=growth-stocks.txt&title=Growth">Growth</a>
+                            <a class="item" href="/equity-list-by-symbol?file=min-vol-stocks.txt&title=MinVolatility">Min Volatility</a>
+                            <a class="item" href="/equity-list-by-symbol?file=spy-stocks.txt&title=SPY">SPY</a>
+                            <a class="item" href="/equity-list-by-symbol?file=value-stocks.txt&title=Value">Value</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ui simple dropdown item">
+                Analytics
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                   <a class="item" href="/asbury-risk">Asbury Risk</a>
+                   <a class="item" href="/dual-momentum?ref=shy&file=momentum.txt">Momentum</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <div class="ui main text container">
+                    
+        <fieldset> 
+            <legend>Equity Detail</legend>                     
+            <form class="ui form" action="/equity-detail" target="_blank">
+                <div class="field">
+                    <label for="equitysymbol">
+                        <span>Symbol:</span>
+                    </label>
+                    <input name="symbol" type="text" id="equitysymbol"></input>
+                </div>
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </fieldset> 
+        
+               
+        <fieldset> 
+            <legend>Relative Performance</legend>                     
+            <form class="ui form" action="/relative-performance" target="_blank">
+            
+                <div class="field">
+                    <label for="reflbl">Reference</label>
+                    <input name="ref" type="text" id="reflbl" maxlength="5"></input>
+                </div>
+                
+                <div class="field">
+                    <label for="fundlbl">Equity</label>
+                    <input name="symbol" type="text" id="fundlbl" maxlength="5"></input>
+                </div>                
+                               
+                <div class="field">
+                    <label for="datebl">Date</label>
+                    
+                    <input name="date" type="date" id="datebl" th:required="required"></input>
+                    <span class="validity"></span>
+                </div>
+                
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </fieldset> 
+              
+        <div class="ui grid">  
+            <div class="eight wide column">     
+                <fieldset> 
+                    <legend>View Events</legend>                     
+                    <form class="ui form" action="/event-req" target="_blank">
+                        <div class="field">
+                            <label for="startdte">
+                                <span>Start Date:</span>
+                            </label>
+                            <input name="start" type="date" id="startdte" th:required="required"></input>
+                            <span class="validity"></span>
+                        </div>
+                        <div class="field">
+                            <label for="enddte">
+                                <span>End Date:</span>
+                            </label>
+                            <input name="end" type="date" id="enddte" th:required="required"></input>
+                            <span class="validity"></span>
+                        </div>
+                        <button class="ui button" type="submit">Submit</button>
+                    </form>
+                </fieldset>
+            </div>
+            
+            <div class="eight wide column">     
+                <fieldset> 
+                    <legend>List Documents</legend>                     
+                    <form class="ui form" action="/all-document-req" target="_blank">
+                        <button class="ui button" type="submit">Submit</button>
+                    </form>
+                </fieldset>
+            </div>
+            
+        </div>
+        
+        <fieldset> 
+            <legend>Search Documents</legend>                     
+            <form class="ui form" action="/document-req" target="_blank">
+                <div class="field">
+                    <label for="searchtype">
+                        <span>Search Type:</span>
+                    </label>
+                    <select name="type" id="searchtype">
+                        <option value="phrase">Phrase</option>
+                        <option value="allwords">All Words</option>
+                        <option value="anyword">Any Word</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="searchtxt">
+                        <span>Search Text:</span>
+                    </label>
+                    <input name="text" type="text" id="searchtxt"></input>
+                </div>
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </fieldset> 
+ 
+                     
+        <fieldset> 
+            <legend>Search Equity Not Working</legend>                     
+            <form class="ui form" action="/searchequity" target="_blank">
+            
+                <div class="field">
+                    <label for="assettypelbl">
+                        <span>Equity type:</span>
+                    </label>
+                    <select name="type" id="assettypelbl">
+                        <option value="etf">Etf</option>
+                        <option value="fund">Fund</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="classtypelbl">
+                        <span>Asset Class:</span>
+                    </label>
+                    <select name="class" id="classtypelbl">
+                        <option value="domestic">Domestic</option>
+                        <option value="bond">Bond</option>
+                        <option value="sector">Sector</option>
+                        <option value="country">Country</option>
+                        <option value="international">International</option>
+                        <option value="commodity">Commodity</option>
+                    </select>
+                </div>
+                                
+                <div class="field">
+                    <label for="fundtypelbl">
+                        <span>Fund type:</span>
+                    </label>
+                    <select name="fundtype" id="fundtypelbl">
+                        <option value="na">NA</option>
+                        
+                        <option value="allcap">All cap</option>
+                        <option value="largecap">Large cap</option>
+                        <option value="midcap">Mid cap</option>
+                        <option value="smallcap">Small cap</option>
+                        <option value="multicap">Multi cap</option>
+                        
+                        <option value="long">Long term</option>
+                        <option value="inter">Mid term</option>
+                        <option value="short">Short term</option>
+                        <option value="ultra">Ultra short</option>
+                        <option value="govt">Govt</option>
+                    </select>
+                </div>
+                
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </fieldset> 
+          
+        <h1 class="ui header">Investments will perform differently in the future than they did in the past.</h1>
+        <br/>
+        <h2 class="ui header">Market moves are determined by the mass psychology of the players in the market. It generally buys the rumor and sells the fact.</h2>
+        <br/>
+        <p>One day I will figure out how to format web pages with CSS.</p>
+         
+    </div>
+
+
+  <div class="ui inverted vertical footer segment">
+      <div class="ui center aligned container">
+          <span>&copy; Micro Well 2017</span>
+      </div>
+  </div>
+
+</body>
+
+</html>

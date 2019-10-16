@@ -1,0 +1,1 @@
+/home/repogit/schemas/Quote.sql

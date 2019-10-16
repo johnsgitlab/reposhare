@@ -1,0 +1,214 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>ETF Tracking</title>
+    
+    <!--- Libs Jquery -->
+    <script type="text/javascript" src="../static/vendor/modernizr-2.8.3.min.js" th:src="@{/vendor/modernizr-2.8.3.min.js}"></script>   
+    <script src="../static/vendor/jquery-1.12.4.js" th:src="@{/vendor/jquery-1.12.4.js}"></script>
+    <script src="../static/vendor/jqueryui-1.12.1.js" th:src="@{/vendor/jqueryui-1.12.1.js}"></script>
+    
+    <!--- Libs Semantic -->
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script> 
+    
+    <!--- Libs Datatables -->
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.js" th:src="@{/datatables/js/datatables-1.10.15.js}"></script>
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.semanticui.min.js" th:src="@{/datatables/js/datatables-1.10.15.semanticui.min.js}"></script>
+    
+    <!--- Libs Components -->
+    
+    <!--- CSS Semantic -->
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/semantic.css" th:href="@{semantic/dist/semantic.css}" media="screen" />
+
+    <!--- CSS Datatables -->
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.css" th:href="@{/datatables/css/datatables-1.10.15.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.semanticui.min.css" th:href="@{/datatables/css/datatables-1.10.15.semanticui.min.css}" media="screen" />
+    
+    <!--- CSS Components -->
+ 
+    <style>
+        body {
+            margin: 2em 5em;
+             font-family:Georgia, "Times New Roman", Times, serif;
+             background-color: #FFFFFF;
+        }
+        .spaced > .button {
+            margin-bottom: 1em;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 7em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+        
+        fieldset {
+             margin-top: 1em;
+             margin-bottom: 2em;
+             
+        }
+        
+        input[type=text], select, textarea{
+            display: inline-block;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=submit] {
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        
+        div {
+            margin-bottom: 10px;
+            
+            align-items: center;
+        }
+        
+        #eventquery {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        input:invalid+span:after {
+            content: '✖';
+            padding-left: 5px;
+        }
+
+        input:valid+span:after {
+            content: '✓';
+            padding-left: 5px;
+        }
+        
+    </style>
+        
+</head>
+
+<body>
+
+    <nav class="ui fixed menu inverted navbar">
+        <a href="" class="brand item">Project Name</a>
+        <a href="" class="active item">Home</a>
+        <a href="" class="item">Features</a>
+        <a href="" class="item">Contact</a>
+    </nav> <!-- end nav -->
+
+
+    <div class="ui main container">
+      
+        <div class="ui grid">
+            <div class="eight wide column">
+                <div id="eventquery">       
+        <fieldset> 
+            <legend>View Events</legend>                     
+            <form class="ui form" action="/event" target="_blank">
+                <div class="field">
+                    <label for="startdte">
+                        <span>Start Date:</span>
+                    </label>
+                    <input name="start" type="date" id="startdte" th:required="required"></input>
+                    <span class="validity"></span>
+                </div>
+                <div class="field">
+                    <label for="enddte">
+                        <span>End Date:</span>
+                    </label>
+                    <input name="end" type="date" id="enddte" th:required="required"></input>
+                    <span class="validity"></span>
+                </div>
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </fieldset>  
+                </div>
+            </div>
+        </div>
+                
+             
+        <div id="banner">    
+             <h1 th:text="${pagetitle}">Page Title</h1>
+        </div>
+
+        <br/>
+
+        
+            <table id="example" class="ui small striped celled table" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    <tr th:each="event_model,iterStat:${event_model}">
+                        <td th:text="${event_model.dateTx}">AAZAX</td>
+                        <td th:text="${event_model.category}">AAAAX</td>
+                        <td th:text="${event_model.description}">AAAAX</td>
+                    </tr>
+                    <tr th:remove="all">
+                        <td>AAAAX</td>
+                        <td>AAAAX</td>
+                        <td>AAAAX</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+        
+ 
+        <div class="ui inverted vertical footer segment">
+            <div class="ui center aligned container">
+                <span>&copy; Micro Well 2017</span>
+            </div>
+        </div>
+            
+    </div>
+    
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var event_model = [[${event_model}]];
+        /*]]>*/
+    </script>
+    
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                "scrollY":        "400px",
+                "scrollCollapse": true,
+                "pageLength":        100,
+                "paging":         true
+             } );
+        } );
+
+    </script>                
+        
+        
+</body>
+
+</html>
+

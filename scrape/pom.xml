@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+<groupId>com.jpw.raptor.scrape</groupId>
+<artifactId>scrape</artifactId>
+<packaging>jar</packaging>
+<version>1.0-SNAPSHOT</version>
+
+<parent>
+<groupId>com.jpw.raptor</groupId>
+<artifactId>raptor</artifactId>
+<version>1.0-SNAPSHOT</version>
+</parent>
+
+<properties>
+</properties>
+
+<modules>
+</modules>
+    
+<dependencies>
+
+<!-- Springboot for rest -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter</artifactId>
+</dependency>
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-web</artifactId>
+</dependency>
+
+<!-- Springboot test -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-test</artifactId>
+<version>${spring.boot.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- Junit -->
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>${junit.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- logging -->
+<dependency>
+<groupId>org.slf4j</groupId>
+<artifactId>slf4j-api</artifactId>
+<version>${slf4j-api.version}</version>
+</dependency>
+
+<!-- Data structures -->
+<dependency>
+<groupId>com.jpw.raptor.model</groupId>
+<artifactId>model</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+
+<!-- Logging -->
+<!-- SLF4J - logging api -->
+<dependency>
+<groupId>org.slf4j</groupId>
+<artifactId>slf4j-api</artifactId>
+<version>1.7.7</version>
+</dependency>
+<dependency>
+<groupId>org.slf4j</groupId>
+<artifactId>slf4j-log4j12</artifactId>
+<version>1.7.7</version>
+</dependency>
+		
+<!-- jackson json --> 
+<dependency>
+<groupId>com.fasterxml.jackson.core</groupId>
+<artifactId>jackson-annotations</artifactId>
+<version>${jackson.annotations.version}</version>
+</dependency>
+<dependency>
+<groupId>com.fasterxml.jackson.core</groupId>
+<artifactId>jackson-core</artifactId>
+<version>${jackson.core.version}</version>
+</dependency>
+<dependency>
+<groupId>com.fasterxml.jackson.core</groupId>
+<artifactId>jackson-databind</artifactId>
+<version>${jackson.databind.version}</version>
+</dependency>
+	
+<!-- GSON -->
+<dependency>
+<groupId>com.google.code.gson</groupId>
+<artifactId>gson</artifactId>
+<version>${gson.version}</version>
+</dependency>
+
+<!-- Lombok -->
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>${lombok.version}</version>
+<scope>provided</scope>
+</dependency>
+
+<!-- Guava -->
+<dependency>
+<groupId>com.google.guava</groupId>
+<artifactId>guava</artifactId>
+<version>${guava.version}</version>
+</dependency>
+
+<!-- parse web pages -->
+<dependency>
+<groupId>org.jsoup</groupId>
+<artifactId>jsoup</artifactId>
+<version>1.7.3</version>
+</dependency>
+
+<dependency>
+<groupId>com.machinepublishers</groupId>
+<artifactId>jbrowserdriver</artifactId>
+<version>0.17.9</version>
+<exclusions>
+<exclusion>
+<groupId>com.google.guava</groupId>
+<artifactId>guava</artifactId>
+</exclusion>
+</exclusions>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+<dependency>
+<groupId>org.seleniumhq.selenium</groupId>
+<artifactId>selenium-chrome-driver</artifactId>
+<version>${selenium.chrome.driver.version}</version>
+</dependency>
+
+</dependencies>
+
+<build>
+<plugins>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+</plugin>
+
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<executions>
+<execution>
+<goals>
+<goal>prepare-agent</goal>
+</goals>
+</execution>
+<!-- attached to Maven test phase -->
+<execution>
+<id>report</id>
+<phase>test</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+
+<plugin>
+<groupId>org.sonarsource.scanner.maven</groupId>
+<artifactId>sonar-maven-plugin</artifactId>
+</plugin>
+
+</plugins>
+</build>
+
+</project>

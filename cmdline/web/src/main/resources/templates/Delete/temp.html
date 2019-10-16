@@ -1,0 +1,102 @@
+                    
+                    <div class="ui tab" data-tab="testing">
+                        <div class="ui grid">
+        
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="testingChart" th:attr="data-symbol=${equity_info.symbol}"></div>
+                                </div>
+
+                                <div class="two wide left floated column">
+                                    <div id="testingLegend"></div>
+                                </div>
+                            </div>
+
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="testingZoom"></div>
+                                </div>
+
+                                <div class="two wide column">
+                                </div>
+                            </div>                 
+                        </div>
+                    </div>
+                    
+                    
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#testingChart").igDataChart({
+                dataSource: data,
+                //title: "Historical Prices",
+                //subtitle: "Data: EOD",
+                legend: { element: "testingLegend" },
+                width: "100%",
+                height: "350px",
+                leftMargin: 30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                horizontalZoomable: true,
+                syncChannel: "channel1",
+                synchronizeVertically: false,
+                syncrhonizeHorizontally: true,
+
+                axes: 
+                [ 
+                    { type: "categoryX", name: "xAxis", label: "datestr", labelExtent: 60 }, 
+                    { type: "numericY", name: "yAxis", title: "Price", labelExtent: 60 }
+                ],
+                series: 
+                [
+                    { 
+                        name: "equity", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "close", markerType: "automatic", showTooltip: true, 
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "Price", resolution: 8
+                    }, 
+                    {   name: "simple20", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "simple20", markerType: "automatic", showTooltip: true, 
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "20  SMA", resolution: 8
+                    }, 
+                    {
+                        name: "simple50", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "simple50", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "50  SMA", resolution: 8
+                    },
+                    {
+                        name: "simple200", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "simple200", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "200 SMA", resolution: 8
+                    },
+                    {
+                        name: "itemToolTips", type: "itemToolTipLayer", useInterpolation: true, transitionDuration: 250
+                    }
+                ]
+            });
+
+            $("#testingZoom").igZoombar({
+                //width: "92%",
+                width: "94%",
+                leftMargin:  30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                target: "#testingChart",
+                zoomWindowMinWidth: 1.2,
+                defaultZoomWindow: { left: 60, width: 40 }
+            });
+
+            $("#testingZoom").css("margin-left", "44px");
+
+            $("#testingZoom").igZoombar("clone").igDataChart({
+                subtitle: null,
+                rightMargin: 0,
+                axes: 
+                [ { name: "xAxis", interval: NaN } ],
+                series: 
+                [
+                    { name: "equity", remove: true }, 
+                    { name: "close", type: "area", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "close" }
+                ]
+            });
+
+        });
+
+    </script>

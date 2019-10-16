@@ -1,0 +1,108 @@
+
+summaryProfile
+-------------------------
+sector	(String)
+industry	(String)
+longBusinessSummary	(String)
+
+
+summaryDetail
+-------------------
+averageDailyVolume10Day
+beta
+
+trailingPE
+When analysts talk about the P/E ratio, they commonly refer to the trailing P/E. It is calculated by dividing the current market value, or share price, by the earnings per share over the previous 12 months. This measure is considered the most reliable since it is calculated based on a company's actual performance.
+
+forwardPE
+a forward P/E ratio is a current stock's price over its "predicted" earnings per share.
+
+marketCap
+the market value of a company's outstanding shares. This figure is found by taking the stock price and multiplying it by the total number of shares outstanding.
+
+priceToSalesTrailing12Months
+It is calculated by dividing the company's market cap by the revenue in the most recent year; or, equivalently, divide the per-share stock price by the per-share revenue.
+
+dividendRate (2.92 forward dividend rate)
+The dividend rate is the total expected dividend payments from an investment, fund or portfolio expressed on an annualized basis plus any additional non-recurring dividends that an investor may receive during that period. if a fund of investments pays a dividend of 50 cents quarterly and pays an extra dividend of 12 cents per share because of a nonrecurring event from which the company benefited, the dividend rate is $2.12 per year.
+
+dividendYield (1.31 forward dividend yield)
+The dividend yield or dividend-price ratio of a share is the dividend per share, divided by the price per share. It is also a company's total annual dividend payments divided by its market capitalization, assuming the number of shares is constant. It is often expressed as a percentage.
+
+
+defaultKeyStatistics
+-------------------
+trailingEps (EPS (TTM))
+A company's profits or earnings are divided by the total number of outstanding shares of stock to calculate the Earnings per Share (ttm). Earnings per Share is usually abbreviated as EPS and the “ttm” that follows stands for Trailing Twelve Months.
+
+enterpriseValue
+The Enterprise Value, or EV for short, is a measure of a company's total value, often used as a more comprehensive alternative to equity market capitalization. Enterprise value is calculated as the market capitalization plus debt, minority interest and preferred shares, minus total cash and cash equivalents.
+
+pegRatio
+The price/earnings to growth ratio (PEG ratio) is a stock's price-to-earnings (P/E) ratio divided by the growth rate of its earnings for a specified time period. The PEG ratio is used to determine a stock's value while taking the company's earnings growth into account, and is considered to provide a more complete picture than the P/E ratio. The lower the PEG ratio, the more the stock may be undervalued given its earnings performance. The degree to which a PEG ratio value indicates an over or underpriced stock varies by industry and by company type, though a broad rule of thumb is that a PEG ratio below one is desirable.
+
+priceToBook
+The price-to-book ratio, or P/B ratio, is a financial ratio used to compare a company's current market price to its book value. ie.  book value per share =  (total assets - total liabilities) / number of shares outstanding
+
+enterpriseToRevenue
+The enterprise-value-to-revenue multiple (EV/R) is a measure of the value of a stock that compares a company's enterprise value to its revenue. EV/R is one of several fundamental indicators that investors use to determine whether a stock is priced well. A high (low) EV/Revenues mean the company is potentially overvalued (undervalued).
+
+enterpriseToEbitda
+This popular metric is used as a valuation tool to compare the value of a company, debt included, to the company’s cash earnings less noncash expenses. It's ideal for analysts and investors looking to compare companies within the same industry. Typically, EV/EBITDA values below 10 are seen as healthy. However, the comparison of relative values among companies within the same industry is the best way for investors to determine companies with the healthiest EV/EBITDA within a specific sector.
+
+profitMargins
+Profit margin is a profitability ratios calculated as net income divided by revenue, or net profits divided by sales.
+
+financialData
+----------------------
+ebitdaMargins
+An EBITDA margin is a measurement of a company's earnings before interest, taxes, depreciation, and amortization as a percentage of its total revenue. The formula for EBITDA margin is: EBITDA Margin = EBITDA/Total Revenue.
+
+profitMargins
+Profit margin is a profitability ratios calculated as net income divided by revenue, or net profits divided by sales. Net income or net profit may be determined by subtracting all of a company’s expenses, including operating costs, material costs (including raw materials) and tax costs, from its total revenue. Profit margins are expressed as a percentage and, in effect, measure how much out of every dollar of sales a company actually keeps in earnings.
+
+grossMargins
+Gross margin is a company's total sales revenue minus its cost of goods sold (COGS), divided by total sales revenue, expressed as a percentage. ... The higher the percentage, the more the company retains on each dollar of sales, to service its other costs and debt obligations.
+
+operatingCashflow
+Operating cash flow indicates whether a company can generate sufficient positive cash flow to maintain and grow its operations, or it may require external financing for capital expansion.
+
+revenueGrowth
+Revenue growth is the increase (or decrease) in a company's sales from one period to the next. Shown as a percentage, revenue growth illustrates the increases and decreases over time identifying trends in the business.
+
+operatingMargins
+Operating margin measures how much profit a company makes on a dollar of sales, after paying for variable costs of production such as wages and raw materials, but before paying interest or tax. It is calculated by dividing a company's operating profit by its net sales.
+
+ebitda
+Earnings before interest, tax, depreciation and amortization (EBITDA) is a measure of a company's operating performance. Essentially, it's a way to evaluate a company's performance without having to factor in financing decisions, accounting decisions or tax environments.
+
+freeCashflow
+free cash flow or FCF is the cash left over after a company pays for its operating expenses and capital expenditures or CAPEX
+
+earningsGrowth
+the annual rate of growth of earnings from investments.
+
+currentRatio
+The current ratio is a liquidity ratio that measures a company's ability to pay short-term and long-term obligations. A current ratio that is in line with the industry average or slightly higher is generally considered acceptable. A current ratio that is lower than the industry average may indicate a higher risk of distress or default. Similarly, if a company has a very high current ratio compared to their peer group, it indicates that management may not be using their assets efficiently. Current Ratio = Current Assets / Current Liabilities 
+
+returnOnAssets
+Return on assets (ROA) is an indicator of how profitable a company is relative to its total assets. ROA = Net Income / Total Assets
+
+debtToEquity
+The D/E ratio indicates how much debt a company is using to finance its assets relative to the value of shareholders’ equity. The result can be expressed either as a number or as a percentage. The formula for calculating D/E ratios is: Debt/Equity Ratio = Total Liabilities / Shareholders' Equity
+
+returnOnEquity
+Return on equity measures a corporation's profitability by revealing how much profit a company generates with the money shareholders have invested. ROE is expressed as a percentage and calculated as: Return on Equity = Net Income/Shareholder's Equity
+
+totalCash
+The sum of all of the cash a company has on its books, including petty cash and funds on deposit in a bank. Total Cash is a component of Current Assets.
+
+totalDebt
+total debt is a combination of both short-term and long-term debt. 
+
+totalRevenue
+Total revenue is the total receipts a seller can obtain from selling goods or service to buyers. It can be written as P × Q, which is the price of the goods multiplied by the quantity of the sold goods. 
+
+totalCashPerShare
+represents a company's total cash divided by its number of shares outstanding. Cash per share is the percentage of a firm's share price that is immediately accessible for spending on activities
+

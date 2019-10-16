@@ -1,0 +1,169 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>ETF Tracking</title>
+    
+    <!--- Libs Jquery -->
+    <script type="text/javascript" src="../static/vendor/modernizr-2.8.3.min.js" th:src="@{/vendor/modernizr-2.8.3.min.js}"></script>   
+    <script src="../static/vendor/jquery-1.12.4.js" th:src="@{/vendor/jquery-1.12.4.js}"></script>
+    <script src="../static/vendor/jqueryui-1.12.1.js" th:src="@{/vendor/jqueryui-1.12.1.js}"></script>
+    
+    <!--- Libs Semantic -->
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script> 
+    
+    <!--- Libs Datatables -->
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.js" th:src="@{/datatables/js/datatables-1.10.15.js}"></script>
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.semanticui.min.js" th:src="@{/datatables/js/datatables-1.10.15.semanticui.min.js}"></script>
+    
+    <!--- Libs Components -->
+    
+    <!--- CSS Semantic -->
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/semantic.css" th:href="@{semantic/dist/semantic.css}" media="screen" />
+
+    <!--- CSS Datatables -->
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.css" th:href="@{/datatables/css/datatables-1.10.15.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.semanticui.min.css" th:href="@{/datatables/css/datatables-1.10.15.semanticui.min.css}" media="screen" />
+    
+    <!--- CSS Components -->
+    <style>
+        body {
+            padding: 1em;
+        }
+        .spaced > .button {
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 7em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+    </style>        
+        
+</head>
+
+<body>
+
+    <nav class="ui fixed menu inverted navbar">
+        <a href="" class="brand item">Project Name</a>
+        <a href="" class="active item">Home</a>
+        <a href="" class="item">Features</a>
+        <a href="" class="item">Contact</a>
+    </nav> <!-- end nav -->
+
+    <div class="ui main container">
+    
+        <div id="banner">    
+             <h1 th:text="${pagetitle}">Page Title</h1>
+        </div>
+
+        <br/>
+
+        <table id="example" class="ui small striped celled table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Class</th>
+                    <th>Type</th>
+                    <th>Sub Type</th>
+                    <th>Factor</th>
+                    <th>As of</th>
+                    <th>YTD</th>
+                    <th>Qtr 4</th>
+                    <th>Qtr 3</th>
+                    <th>Qtr 2</th>
+                    <th>Qtr 1</th>
+                    <th>Prior Year</th>
+                    <th>Qtr 4</th>
+                    <th>Qtr 3</th>
+                    <th>Qtr 2</th>
+                    <th>Qtr 1</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr th:each="retrn,iterStat:${retrn}">
+                    <!--  <td th:text="${retrn.symbol}">AAAAX</td> -->
+                    <td>
+                        <a target="_blank" th:href="@{/equity-detail(symbol=${retrn.symbol})}" th:text="${retrn.symbol}">  AAAAX </a>
+                    </td>
+                    <td th:text="${retrn.assetClass}">large-cap</td>
+                    <td th:text="${retrn.fundType}">large-cap</td>
+                    <td th:text="${retrn.fundSubType}">large-cap</td>
+                    <td th:text="${retrn.factor}">large-cap</td>
+                    <td th:text="${retrn.date}">0.11</td>
+                    <td th:text="${retrn.currYtd}">0.75</td>
+                    <td th:text="${retrn.currQtr4}">0.22</td>
+                    <td th:text="${retrn.currQtr3}">-0.21</td>
+                    <td th:text="${retrn.currQtr2}">0.43</td>
+                    <td th:text="${retrn.currQtr1}">1.09</td>
+                    <td th:text="${retrn.priorYtd}">0.75</td>
+                    <td th:text="${retrn.priorQtr4}">0.22</td>
+                    <td th:text="${retrn.priorQtr3}">-0.21</td>
+                    <td th:text="${retrn.priorQtr2}">0.43</td>
+                    <td th:text="${retrn.priorQtr1}">1.09</td>
+                </tr>
+                <tr th:remove="all">
+                    <td><a  href="http://localhost:8080/" target="_blank">AAAIX</a></td>
+                    <td>small cap</td>
+                    <td>small cap</td>
+                    <td>small cap</td>
+                    <td>small cap</td>
+                    <td>as of</td>
+                    <td>0.75</td>
+                    <td>0.22</td>
+                    <td>-0.21</td>
+                    <td>0.43</td>
+                    <td>1.09</td>
+                    <td>0.75</td>
+                    <td>0.22</td>
+                    <td>-0.21</td>
+                    <td>0.43</td>
+                    <td>1.09</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var retrn = [[${retrn}]];
+        /*]]>*/
+    </script>
+    
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                 "scrollY":        "400px",
+                "scrollCollapse": true,
+                "pageLength":        100,
+                "paging":         true
+             } );
+        } );
+
+    </script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title th:text="${nasdaq_info.symbol}"></title>
+
+    
+    
+    <!--- Libs Jquery -->
+    <script type="text/javascript" src="../static/vendor/modernizr-2.8.3.min.js" th:src="@{/vendor/modernizr-2.8.3.min.js}"></script>   
+    <script src="../static/vendor/jquery-1.12.4.js" th:src="@{/vendor/jquery-1.12.4.js}"></script>
+    <script src="../static/vendor/jqueryui-1.12.1.js" th:src="@{/vendor/jqueryui-1.12.1.js}"></script>
+    
+    <!--- Libs Semantic -->
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script> 
+    
+    <!--- Libs Ignite -->
+    <script type="text/javascript" src="../static/IgniteUI/js/infragistics.core.js" th:src="@{/IgniteUI/js/infragistics.core.js}"></script>
+    <script type="text/javascript" src="../static/IgniteUI/js/infragistics.dv.js" th:src="@{/IgniteUI/js/infragistics.dv.js}"></script>
+    
+        <!--- Libs Datatables -->
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.js" th:src="@{/datatables/js/datatables-1.10.15.js}"></script>
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.semanticui.min.js" th:src="@{/datatables/js/datatables-1.10.15.semanticui.min.js}"></script>
+    
+    <!--- Libs Components -->
+    
+    <!--- CSS Semantic -->
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/semantic.css" th:href="@{semantic/dist/semantic.css}" media="screen" />
+
+    <!-- CSS Ignite -->
+    <link rel="stylesheet" type="text/css" href="../static/IgniteUI/css/themes/infragistics/infragistics.theme.css" th:href="@{/IgniteUI/css/themes/infragistics/infragistics.theme.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/IgniteUI/css/structure/infragistics.css" th:href="@{/IgniteUI/css/structure/infragistics.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/IgniteUI/css/structure/modules/infragistics.ui.chart.css" th:href="@{/IgniteUI/css/structure/modules/infragistics.ui.chart.css}" media="screen" />
+
+    <!--- CSS Datatables -->
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.css" th:href="@{/datatables/css/datatables-1.10.15.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.semanticui.min.css" th:href="@{/datatables/css/datatables-1.10.15.semanticui.min.css}" media="screen" />
+    
+    <!--- CSS Components -->
+    <style>
+        body {
+            padding: 1em;
+        }
+        .spaced > .button {
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 6em;
+        }
+        .horizontal.divider {
+            margin-top: 1em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+    </style>        
+
+    <style type="text/css">
+        
+        .selectionOptions {
+            width: 450px;
+            margin-top: 10px;
+        }
+
+        .selectionOptions > label {
+            display: block;
+        }
+    </style>
+   
+</head>
+
+<body>
+
+    <nav class="ui fixed menu inverted navbar">
+        <a href="" class="brand item">Project Name</a>
+        <a href="" class="active item">Home</a>
+        <a href="" class="item">Features</a>
+        <a href="" class="item">Contact</a>
+    </nav> <!-- end nav -->
+
+    <div class="ui main container">
+
+        <div class="ui grid page">
+        
+            <div class="two wide column">
+                <p th:text="${nasdaq_info.symbol}">symbol</p> 
+            </div>
+            <div class="twelve wide column">
+                <p th:text="${nasdaq_info.name}">name</p> 
+            </div>
+            <div class="row">
+                <div class="column">
+                    <p th:text="${nasdaq_info.overview}">Overview</p>    
+                </div>
+            </div>
+
+            <div class="sixteen wide column">
+                <table class="ui very basic table" id="etfoverviewtable">
+                    <tr>
+                        <th class="center aligned">Category</th>
+                        <th class="center aligned">Fund Type</th>
+                        <th class="center aligned">Sub Type</th>
+                        <th class="center aligned">Factor</th>
+                    </tr>
+                    <tr>
+                        <td class="center aligned" th:text="${nasdaq_info.assetClass}">Category</td>
+                        <td class="center aligned" th:text="${nasdaq_info.fundType}">Fund Type</td>
+                        <td class="center aligned" th:text="${nasdaq_info.fundSubType}">sub Type</td>
+                        <td class="center aligned" th:text="${nasdaq_info.factor}">factor</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="ui horizontal"></div>
+            
+            <div class="sixteen wide column">
+                <div class="ui segment">
+                
+                    <div class="ui menu top">
+                        <a class="active item" data-tab="performance">Performance</a>
+                        <a class="item" data-tab="holdings">Holdings</a>
+                        <a class="item" data-tab="topholdings">Top Holdings</a>
+                        <a class="item" data-tab="charts">Charts</a>
+                        <a class="item" data-tab="terms">Terms</a>
+                        <a class="item" data-tab="testing">Testing</a>
+                    </div>
+            
+                    <div class="ui tab active" data-tab="performance">
+
+                        <div class="ui three column grid">
+
+                            <div class="column">
+                                <table class="ui very basic table" id="detail1">
+                                    <thead>
+                                        <tr>
+                                            <th class="center aligned" colspan="2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td class="value">Performance Date</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.date}">today</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Yield</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.dividendYield}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">YTD</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.ytd}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">One Day</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.oneDay}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">One Week</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.oneWeek}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Two Weeks</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.twoWeeks}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Four Weeks</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.fourWeeks}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Three Months</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.threeMonths}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">One Year</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.oneYear}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Expense Ratio</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.expenseRatio}">1.0</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="column">
+                                <table class="ui very basic table" id="detail2">
+                                    <thead>
+                                        <tr>
+                                            <th class="center aligned" colspan="2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td class="value">Alpha</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.alpha}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Beta</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.beta}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">R Squared</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.rSquared}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Deviation</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.deviation}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Sharpe Ratio</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.sharpeRatio}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Treynor Ratio</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.treynorRatio}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">PE</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.pe}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">PB</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.pb}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">PS</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.ps}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">PC</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.pc}">1.0</td>
+                                    </tr>
+                                </table>
+                            </div>
+            
+                            <div class="column">
+                                <table class="ui very basic table" id="detail2">
+                                    <thead>
+                                        <tr>
+                                            <th class="center aligned" colspan="2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td class="value">Ref Date</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.lastUpdate}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Stars</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.morningStars}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Rating</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.morningRating}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Lip Total</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.lipperTotal}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Lip Consistent</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.lipperConsistent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Lip Preserve</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.lipperPreservation}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Lip Expense</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.lipperExpense}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Lip Tax</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.lipperTax}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Market Cap</td>
+                                        <td class="right aligned"  th:text="${#numbers.formatInteger(nasdaq_info.marketCap,1,'COMMA')}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Daily Volume</td>
+                                        <td class="right aligned"  th:text="${#numbers.formatInteger(nasdaq_info.avgDailyVol,1,'COMMA')}">1.0</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+      
+                        <br/>
+                        <div class="ui horizontal divider"></div>
+                    </div>
+
+                    <div class="ui tab" data-tab="holdings">
+
+                        <div class="ui three column grid">
+
+                            <div class="column">
+                                <table class="ui very basic table" id="detail">
+                                    <thead>
+                                        <tr>
+                                            <th class="center aligned" colspan="2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td class="value">Basic Materials</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.basicMaterials}">today</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Consumer Cyclical</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.consumerCyclical}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Financials</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.financialServices}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Realestate</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.realestate}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Consumer Defensive</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.consumerDefensive}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Healthcare</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.healthcare}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Utilities</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.utilities}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Communications</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.communicationServices}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Energy</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.energy}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Industrials</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.industrials}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Technology</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.technology}">1.0</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="column">
+                                <table class="ui very basic table" id="detail2">
+                                    <thead>
+                                        <tr>
+                                            <th class="center aligned" colspan="2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td class="value">Maturity</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondMaturity}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Duration</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondDuration}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Aaa</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondAaaPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Aa</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondAaPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">A</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondAPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Bbb</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondBbbPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Bb</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondBbPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">B</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondBPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Below B</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondBelowbPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">US</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondUsPercent}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Other</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondOtherPercent}">1.0</td>
+                                    </tr>
+                                </table>
+                            </div>
+            
+                            <div class="column">
+                                <table class="ui very basic table" id="detail2">
+                                    <thead>
+                                        <tr>
+                                            <th class="center aligned" colspan="2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td class="value">Stock</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.stockPosition}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Bond</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.bondPosition}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Cash</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.cashPosition}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Convertible</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.convertiblePosition}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Preferred</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.preferredPosition}">1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="value">Other</td>
+                                        <td class="right aligned"  th:text="${nasdaq_info.otherPosition}">1.0</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+      
+                        <br/>
+                        <div class="ui horizontal divider"></div>
+                    </div>
+                    
+                    <div class="ui tab" data-tab="topholdings">
+                        <div class="ui grid">
+                            <table id="holdingexample" class="ui small striped celled table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Name</th>
+                                        <th>Percent</th>
+                                    </tr>
+                                </thead>
+            
+                                <tbody>
+                                    <tr th:each="holding_list,iterStat:${holding_list}">
+                                        <td th:text="${holding_list.symbol}">AAZAX</td>
+                                        <td th:text="${holding_list.holdingName}">name</td>
+                                        <td th:text="${holding_list.holdingPercent}">2.1</td>
+                                    </tr>
+                                </tbody>
+                            </table>         
+                        </div>  
+                    </div>           
+                    <div class="ui tab" data-tab="charts">
+                        <div class="ui grid">
+        
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="historyChart" th:attr="data-symbol=${nasdaq_info.symbol}"></div>
+                                </div>
+
+                                <div class="two wide left floated column">
+                                    <div id="historyLegend"></div>
+                                </div>
+                            </div>
+    
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="historyVolumeChart"></div>
+                                </div>
+
+                                <div class="two wide column">
+                                </div>
+                            </div>
+
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="historyZoom"></div>
+                                </div>
+
+                                <div class="two wide column">
+                                </div>
+                            </div>                 
+            
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="indicatorChart"></div>
+                                </div>
+
+                                <div class="two wide column">
+                                </div>
+                            </div>                
+            
+                            <div class="two column row">
+                                <div class="four wide column">
+                                </div>
+                                <div class="eight wide column">
+                                    <div class="selectionOptions">
+                                        <label>Select Indicator:</label>
+                                        <select id="indicatorTypes"></select>
+                                    </div>
+                                    <div class="selectionOptions" style="display: inline-block"> </div>   
+                                </div>
+                            </div> 
+                        </div>  
+                    </div>                 
+                    <div class="ui tab" data-tab="terms">
+                        <div class="ui grid">
+<p>
+<b>Alpha</b> measures returns relative to a benchmark index. 
+It is a number (3 or -5), that refers to a percentage (i.e. 3% better or 5% worse). 
+</p>
+
+<p>
+<b>Beta</b> indicates whether the investment is more or less volatile than the market as a whole. 
+A beta of 1 indicates the price moves with the market. A beta of less than 1 means that the price is less volatile than the market. 
+A beta of greater than 1 means the price is more volatile than the market. . 
+</p>
+
+<p>
+<b>R-squared</b> measures a fund performance versus its benchmark index. 
+Values range from 0 to 100%. Values from 70 to 100 indicate good correlation. 
+40 to 70 indicate average correlation. Below 40 indicates poor correlation.
+</p>
+
+<p>
+<b>Beta should only be used when a security has a high R-squared value</b>. 
+For example, if a fund has an R-squared value of close to 100% but has a beta below 1, 
+it is most likely offering higher risk-adjusted returns.
+</p>
+
+<p>
+<b>Deviation</b> depicts historical volatility. 
+A volatile portfolio will have a higher standard deviation than a less volatile portfolio.
+</p>
+
+<p>
+<b>Sharpe Ratio</b> measures the excess return compared to treasury bills. 
+The higher the number the better the performance.
+</p>
+
+<p>
+<b>Treynor Ratio</b> measures the excess return compared to the whole market. 
+The higher the number the better the performance.
+</p>
+
+<p>
+<b>PE</b> measures the current share price relative to the per-share earnings. 
+</p>
+
+<p>
+<b>PS</b> compares a company’s stock price to its revenues. 
+A low ratio may indicate possible undervaluation, 
+while a ratio that is significantly above the average may suggest overvaluation. 
+</p>
+
+<p>
+<b>PC</b> measures an equities market value to its cash flow. Look for smaller numbers.
+</p>
+
+<p>
+<b>PB</b> measures an equities market value to its book value.
+</p>
+                            
+                        </div>  
+                    </div>
+                                               
+                    <div class="ui tab" data-tab="testing">
+                        <div class="ui grid">
+        
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="testingChart" th:attr="data-symbol=${nasdaq_info.symbol}"></div>
+                                </div>
+
+                                <div class="two wide left floated column">
+                                    <div id="testingLegend"></div>
+                                </div>
+                            </div>
+
+                            <div class="two column row">
+                                <div class="fourteen wide column">
+                                    <div id="testingZoom"></div>
+                                </div>
+
+                                <div class="two wide column">
+                                </div>
+                            </div>                 
+                        </div>
+                    </div> 
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script type="text/javascript" src="js/financial-indicators.js"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var nasdaq_info = [[${nasdaq_info}]];
+            var data = [[${data}]];
+            var holding_list = [[${holding_list}]];
+            var testdata = [[${testdata}]];
+        /*]]>*/
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#historyChart").igDataChart({
+                dataSource: data,
+                //title: "Historical Prices",
+                //subtitle: "Data: EOD",
+                legend: { element: "historyLegend" },
+                width: "100%",
+                height: "350px",
+                leftMargin: 30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                horizontalZoomable: true,
+                syncChannel: "channel1",
+                synchronizeVertically: false,
+                syncrhonizeHorizontally: true,
+
+                axes: 
+                [ 
+                    { type: "categoryX", name: "xAxis", label: "datestr", labelExtent: 60 }, 
+                    { type: "numericY", name: "yAxis", title: "Price", labelExtent: 60 }
+                ],
+                series: 
+                [
+                    { 
+                        name: "equity", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "close", markerType: "automatic", showTooltip: true, 
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "Price", resolution: 8
+                    }, 
+                    {
+                        name: "simple20", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "simple20", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "20  SMA", resolution: 8
+                    },
+                    {
+                        name: "simple50", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "simple50", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "50  SMA", resolution: 8
+                    },
+                    {
+                        name: "simple200", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "simple200", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "200 SMA", resolution: 8
+                    },
+                    {
+                        name: "itemToolTips", type: "itemToolTipLayer", useInterpolation: true, transitionDuration: 250
+                    }
+                ]
+            });
+
+            $("#historyVolumeChart").igDataChart({
+                dataSource: data,
+                width: "100%",
+                //height: "350px",
+                height: "275px",
+                leftMargin: 30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                horizontalZoomable: true,
+                syncChannel: "channel1",
+                synchronizeVertically: false,
+                syncrhonizeHorizontally: true,
+
+                axes: 
+                [
+                    { type: "categoryX", name: "xAxis", label: "datestr", labelExtent: 60, localVisibility: "collapsed" }, 
+                    {
+                        type: "numericY", name: "yAxis", title: "volume", labelExtent: 60,
+                        formatLabel: function (v) {
+                            if (v > 1000000) {
+                                v /= 1000000;
+                                return v + "M";
+                            }
+                            if (v > 1000) {
+                                v /= 1000;
+                                return v + "K";
+                            }
+
+                            return v.toString();
+                        }
+                    }
+                ],
+                series: 
+                [
+                    {
+                        name: "equityVolume", type: "area", xAxis: "xAxis", yAxis: "yAxis", brush: "#7C932F", outline: "#556420", valueMemberPath: "volume",
+                        showTooltip: true, isTransitionInEnabled: true, isHighlightingEnabled: true, transitionInDuration: 250, title: "Volume",
+                    }, 
+                    { name: "itemToolTips", type: "itemToolTipLayer", useInterpolation: true, transitionInDuration: 250, }, 
+                    { name: "crosshairLayer", title: "crosshair", type: "crosshairLayer", useInterpolation: false, transitionDuration: 500 }
+                ]
+            });
+
+            $("#historyZoom").igZoombar({
+                //width: "92%",
+                width: "94%",
+                leftMargin:  30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                target: "#historyChart",
+                zoomWindowMinWidth: 1.2,
+                defaultZoomWindow: { left: 60, width: 40 }
+            });
+
+            $("#historyZoom").css("margin-left", "44px");
+
+            $("#historyZoom").igZoombar("clone").igDataChart({
+                subtitle: null,
+                rightMargin: 0,
+                axes: 
+                [ { name: "xAxis", interval: NaN } ],
+                series: 
+                [
+                    { name: "equity", remove: true }, 
+                    { name: "close", type: "area", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "close" }
+                ]
+            });
+
+        });
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#indicatorChart").igDataChart({
+                width: "100%",
+                height: "350px",
+                leftMargin: 30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                dataSource: data,
+                title: "Technical Analysis",
+                horizontalZoomable: true,
+                syncChannel: "channel1",
+                synchronizeVertically: false,
+                syncrhonizeHorizontally: true,
+                axes: 
+                [
+                    { type: "categoryX", label: "datestr", name: "xAxis", labelExtent: 60, localVisibility: "collapsed" }, 
+                    { type: "numericY", name: "yAxis", title: "Value", labelExtent: 60 }
+                ],
+                series: 
+                [
+                    {
+                        type: "moneyFlowIndexIndicator", isTransitionInEnabled: true, closeMemberPath: "close", highMemberPath: "high", lowMemberPath: "low",
+                        openMemberPath: "open", volumeMemberPath: "volume", xAxis: "xAxis", yAxis: "yAxis", name: "indicatorSeries", title: "Financial Indicator Data",
+                    }, 
+                    {
+                        name: "crosshairLayer", title: "crosshair", type: "crosshairLayer", useInterpolation: false, transitionDuration: 500
+                    }
+                ]
+            });
+
+            $.each(indicators, function (index, item) {
+                $('#indicatorTypes').append($('<option></option>').val(item.key).html(item.text));
+            });
+
+            $("#indicatorTypes").change(function () {
+                changeIndicator($(this).val());
+            });
+
+        });
+
+        function changeIndicator(newIndicator) {
+            $("#indicatorChart").igDataChart("option", "series", 
+                [ { name: "indicatorSeries", remove: true } ]
+            );
+
+            $("#indicatorChart").igDataChart("option", "series", 
+                [
+                    {
+                        type: newIndicator, name: "indicatorSeries", title: "Financial Indicator Data", xAxis: "xAxis", yAxis: "yAxis", closeMemberPath: "close",
+                        highMemberPath: "high", lowMemberPath: "low", openMemberPath: "open", volumeMemberPath: "volume",
+
+                    }, 
+                    { name: "crosshairLayer", title: "crosshair", type: "crosshairLayer", useInterpolation: false, transitionDuration: 500 }
+                ]
+            );
+        };
+
+    </script>
+    
+    <script type="text/javascript">
+        $('.top.menu .item').tab();
+    </script>
+
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+            $('#holdingexample').DataTable( {
+                
+                "scrollCollapse": true,
+                "pageLength":        10,
+                "paging":         true
+             } );
+        } );
+
+    </script>
+    
+    
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#testingChart").igDataChart({
+                dataSource: testdata,
+                //title: "Historical Prices",
+                //subtitle: "Data: EOD",
+                legend: { element: "testingLegend" },
+                width: "100%",
+                height: "350px",
+                leftMargin: 30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                horizontalZoomable: true,
+                syncChannel: "channel2",
+                synchronizeVertically: false,
+                syncrhonizeHorizontally: true,
+
+                axes: 
+                [ 
+                    { type: "categoryX", name: "xAxis", label: "datestr", labelExtent: 60 }, 
+                    { type: "numericY", name: "yAxis", title: "Price", labelExtent: 60 }
+                ],
+                series: 
+                [
+                    { 
+                        name: "equity", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "close", markerType: "automatic", showTooltip: true, 
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "Price", resolution: 8
+                    }, 
+                    {   name: "pp", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "pivotPoint", markerType: "automatic", showTooltip: true, 
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "close", transitionInDuration: 250, title: "pp", resolution: 8
+                    }, 
+                    
+                    {
+                        name: "itemToolTips", type: "itemToolTipLayer", useInterpolation: true, transitionDuration: 250
+                    }
+                ]
+            });
+
+            $("#testingZoom").igZoombar({
+                //width: "92%",
+                width: "94%",
+                leftMargin:  30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                target: "#testingChart",
+                zoomWindowMinWidth: 1.2,
+                defaultZoomWindow: { left: 60, width: 40 }
+            });
+
+            $("#testingZoom").css("margin-left", "44px");
+
+            $("#testingZoom").igZoombar("clone").igDataChart({
+                subtitle: null,
+                rightMargin: 0,
+                axes: 
+                [ { name: "xAxis", interval: NaN } ],
+                series: 
+                [
+                    { name: "equity", remove: true }, 
+                    { name: "close", type: "area", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "close" }
+                ]
+            });
+
+        });
+
+    </script>
+    
+</body>
+</html>
+

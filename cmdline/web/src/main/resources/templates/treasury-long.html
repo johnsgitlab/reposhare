@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>Treasury Yield Curves</title>
+
+    
+    
+    <!--- Libs Jquery -->
+    <script type="text/javascript" src="../static/vendor/modernizr-2.8.3.min.js" th:src="@{/vendor/modernizr-2.8.3.min.js}"></script>   
+    <script src="../static/vendor/jquery-1.12.4.js" th:src="@{/vendor/jquery-1.12.4.js}"></script>
+    <script src="../static/vendor/jqueryui-1.12.1.js" th:src="@{/vendor/jqueryui-1.12.1.js}"></script>
+    
+    <!--- Libs Semantic -->
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script> 
+    
+    <!--- Libs Ignite -->
+    <script type="text/javascript" src="../static/IgniteUI/js/infragistics.core.js" th:src="@{/IgniteUI/js/infragistics.core.js}"></script>
+    <script type="text/javascript" src="../static/IgniteUI/js/infragistics.dv.js" th:src="@{/IgniteUI/js/infragistics.dv.js}"></script>
+    
+        <!--- Libs Datatables -->
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.js" th:src="@{/datatables/js/datatables-1.10.15.js}"></script>
+    <script type="text/javascript" src="../static/datatables/js/datatables-1.10.15.semanticui.min.js" th:src="@{/datatables/js/datatables-1.10.15.semanticui.min.js}"></script>
+    
+    <!--- Libs Components -->
+    
+    <!--- CSS Semantic -->
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/semantic.css" th:href="@{semantic/dist/semantic.css}" media="screen" />
+
+    <!-- CSS Ignite -->
+    <link rel="stylesheet" type="text/css" href="../static/IgniteUI/css/themes/infragistics/infragistics.theme.css" th:href="@{/IgniteUI/css/themes/infragistics/infragistics.theme.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/IgniteUI/css/structure/infragistics.css" th:href="@{/IgniteUI/css/structure/infragistics.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/IgniteUI/css/structure/modules/infragistics.ui.chart.css" th:href="@{/IgniteUI/css/structure/modules/infragistics.ui.chart.css}" media="screen" />
+
+    <!--- CSS Datatables -->
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.css" th:href="@{/datatables/css/datatables-1.10.15.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/datatables/css/datatables-1.10.15.semanticui.min.css" th:href="@{/datatables/css/datatables-1.10.15.semanticui.min.css}" media="screen" />
+    
+    <!--- CSS Components -->
+    <style>
+        body {
+            padding: 1em;
+        }
+        .spaced > .button {
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 6em;
+        }
+        .horizontal.divider {
+            margin-top: 1em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+    </style>        
+
+    <style type="text/css">
+        
+        .selectionOptions {
+            width: 450px;
+            margin-top: 10px;
+        }
+
+        .selectionOptions > label {
+            display: block;
+        }
+    </style>
+   
+</head>
+
+<body>
+
+    <nav class="ui fixed menu inverted navbar">
+        <a href="" class="brand item">Project Name</a>
+        <a href="" class="active item">Home</a>
+        <a href="" class="item">Features</a>
+        <a href="" class="item">Contact</a>
+    </nav> <!-- end nav -->
+
+    <div class="ui main container">
+
+        <div class="ui grid page">
+            
+            <div class="row">
+                <div class="column">
+                    <p >Treasury Yields</p>    
+                </div>
+            </div>
+
+            <div class="ui horizontal divider"></div>
+
+                <div class="sixteen wide column">
+                <div class="ui grid">
+
+                    <div class="two column row">
+                        <div class="fourteen wide column">
+                            <div id="historyChart" th:attr="data-symbol=yield"></div>
+                        </div>
+
+                        <div class="two wide left floated column">
+                            <div id="historyLegend"></div>
+                        </div>
+                    </div>
+    
+                    <div class="two column row">
+                        <div class="fourteen wide column">
+                            <div id="historyVolumeChart"></div>
+                        </div>
+
+                        <div class="two wide column">
+                        </div>
+                    </div>
+
+                    <div class="two column row">
+                        <div class="fourteen wide column">
+                            <div id="historyZoom"></div>
+                        </div>
+
+                        <div class="two wide column">
+                        </div>
+                    </div>                 
+            
+                    <div class="two column row">
+                        <div class="fourteen wide column">
+                            <div id="indicatorChart"></div>
+                        </div>
+
+                        <div class="two wide column">
+                        </div>
+                    </div>                
+            
+                    </div>         
+                </div>
+            </div>
+    </div>
+    
+    <script type="text/javascript" src="js/financial-indicators.js"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var data = [[${data}]];
+        /*]]>*/
+    </script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#historyChart").igDataChart({
+                dataSource: data,
+                //title: "Historical Prices",
+                //subtitle: "Data: EOD",
+                legend: { element: "historyLegend" },
+                width: "100%",
+                height: "350px",
+                leftMargin: 30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                horizontalZoomable: true,
+                syncChannel: "channel1",
+                synchronizeVertically: false,
+                syncrhonizeHorizontally: true,
+
+                axes: 
+                [ 
+                    { type: "categoryX", name: "xAxis", label: "datestr", labelExtent: 60 }, 
+                    { type: "numericY", name: "yAxis", title: "Price", labelExtent: 60 }
+                ],
+                series: 
+                [
+                    {
+                        name: "fiveYears", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "fiveYears", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "fiveYears", transitionInDuration: 250, title: "5 Yr", resolution: 8
+                    },
+                    { 
+                        name: "sevenYears", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "sevenYears", markerType: "automatic", showTooltip: true, 
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "sevenYears", transitionInDuration: 250, title: "7 Yr", resolution: 8
+                    }, 
+                    {   name: "tenYears", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "tenYears", markerType: "automatic", showTooltip: true, 
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "tenYears", transitionInDuration: 250, title: "10 Yr", resolution: 8
+                    }, 
+                    {
+                        name: "twentyYears", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "twentyYears", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "twentyYears", transitionInDuration: 250, title: "20 Yr", resolution: 8
+                    },
+                    {
+                        name: "thirtyYears", type: "line", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "thirtyYears", markerType: "automatic", showTooltip: true,
+                        isTransitionInEnabled: true, isHighlightingEnabled: true, title: "thirtyYears", transitionInDuration: 250, title: "30 Yr", resolution: 8
+                    },
+                    {
+                        name: "itemToolTips", type: "itemToolTipLayer", useInterpolation: true, transitionDuration: 250
+                    }
+                ]
+            });
+
+            $("#historyZoom").igZoombar({
+                //width: "92%",
+                width: "94%",
+                leftMargin:  30,
+                rightMargin: 30,
+                windowRectMinWidth: 0.05,
+                target: "#historyChart",
+                zoomWindowMinWidth: 1.2,
+                defaultZoomWindow: { left: 60, width: 40 }
+            });
+
+            $("#historyZoom").css("margin-left", "44px");
+
+            $("#historyZoom").igZoombar("clone").igDataChart({
+                subtitle: null,
+                rightMargin: 0,
+                axes: 
+                [ { name: "xAxis", interval: NaN } ],
+                series: 
+                [
+                    { name: "equity", remove: true }, 
+                    { name: "close", type: "area", xAxis: "xAxis", yAxis: "yAxis", valueMemberPath: "close" }
+                ]
+            });
+
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        $('.top.menu .item').tab();
+    </script>
+    
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+            $('#holdingexample').DataTable( {
+                
+                "scrollCollapse": true,
+                "pageLength":        10,
+                "paging":         true
+             } );
+        } );
+
+    </script>
+    
+</body>
+</html>
+

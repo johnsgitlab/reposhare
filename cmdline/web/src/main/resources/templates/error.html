@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>MyTabName</title>
+   
+
+    <!-- Site Properties -->
+    
+
+    <!--- Site CSS -->
+
+
+    <!--- Component CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/button.css" th:href="@{semantic/dist/components/button.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/container.css" th:href="@{semantic/dist/components/container.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/divider.css"  th:href="@{semantic/dist/components/divider.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/dropdown.css" th:href="@{semantic/dist/components/dropdown.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/grid.css" th:href="@{semantic/dist/components/grid.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/header.css" th:href="@{semantic/dist/components/header.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/header.css" th:href="@{semantic/dist/components/header.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/list.css" th:href="@{semantic/dist/components/list.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/icon.css" th:href="@{semantic/dist/components/icon.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/input.css" th:href="@{semantic/dist/components/input.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/menu.css" th:href="@{semantic/dist/components/menu.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/popup.css" th:href="@{semantic/dist/components/popup.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/reset.css" th:href="@{semantic/dist/components/reset.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/segment.css" th:href="@{semantic/dist/components/segment.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/site.css" th:href="@{semantic/dist/components/site.css}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/components/transition.css" th:href="@{semantic/dist/components/transition.css}" media="screen" />
+
+    <!--- Libs -->
+    <script src="../static/vendor/jquery.min.js" th:src="@{/vendor/jquery.min.js}"></script>
+    <script src="../static/semantic/assets/library/iframe-content.js" th:src="@{/semantic/assets/library/iframe-content.js}"></script>
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script> 
+
+    <!--- Component JS -->
+    <script type="text/javascript" src="../static/semantic/dist/components/popup.js" th:src="@{/semantic/dist/components/popup.js}"></script>
+    <script type="text/javascript" src="../static/semantic/dist/components/transition.js" th:src="@{/semantic/dist/components/transition.js}"></script>
+    <script type="text/javascript" src="../static/semantic/dist/components/dropdown.js" th:src="@{/semantic/dist/components/dropdown.js}"></script>
+
+    <!--- Example CSS -->
+    <style>
+        body {
+            padding: 1em;
+        }   
+    </style>
+
+    <style>
+        input[type=text], select, textarea{
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            loat: right;
+        }
+    </style>
+    
+    <!--- Example Javascript -->
+    <script>
+        $(document)
+                .ready(function() {
+                    $('.ui.dropdown').dropdown();
+
+                    $('.ui.buttons .dropdown.button').dropdown({
+                        action: 'combo'
+                    });
+                })
+        ;
+    </script>
+
+    <script type="text/javascript">
+        function ExampleJS(){
+            var jSearchvalue = document.getElementById("searchtext").value;
+            var jSearch = document.getElementById("searchtype").value;
+            if (jSearch === "etf") {
+                window.open('/etfdetail?symbol='+jSearchValue,'_blank');
+            } else if (jSearch === "fund") {
+                alert("Search for fund is: " + jSearchValue);
+            } else {
+                alert("Search for index is: " + jSearchValue);
+            }
+            //window.open('/index','_blank');
+        }
+    </script>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
+        .main.container {
+            margin-top: 7em;
+        }
+        .wireframe {
+            margin-top: 2em;
+        }
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+        .spaced > .button {
+            margin-bottom: 1em;
+        }
+        .oops {
+            font-family: arial;
+            font-weight: bold;
+            font-size: 140px;
+        }
+        .message {
+            font-family: arial;
+            font-size: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="ui inverted fixed  menu">
+        <div class="ui container">
+
+            <a href="javascript:alert('Falcon Icon Selected');" class="header item">
+                <img class="logo" src="../static/images/falcon.png" th:src="@{/images/falcon.png}"/>
+                Raptor Financials - Version 4.0
+            </a>
+
+            <a href="javascript:alert('Index Selected');" class="item">Indexs</a>
+
+            <div class="ui simple dropdown item">
+                ETF
+                <i class="dropdown icon"></i>
+                <div class="menu">
+
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        List
+                        <div class="menu">
+                            <a class="item" href="/etf-list-owned">Owned</a>
+                            <a class="item" href="/etf-list-tracked">Tracked</a>
+                            <a class="item" href="/etf-list-relevant">Relevant</a>
+                            <a class="item" href="/etf-list-all">All</a>
+                            <a class="item" href="/etf-list-factors-all">Factors</a>
+                            <a class="item" href="/etf-list-factors-class?class=domestic">Domestic Factors</a>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                          <i class="dropdown icon"></i>
+                          Summary
+                          <div class="menu">
+                              <a class="item" href="/etf-summary-all">all</a>
+                              <a class="item" href="/etf-summary-class?class=domestic">domestic</a>
+                              <a class="item" href="/etf-summary-class?class=allocation">allocation</a>
+                              <a class="item" href="/etf-summary-class?class=international">international</a>
+                              <a class="item" href="/etf-summary-class?class=country">country</a>
+                              <a class="item" href="/etf-summary-class?class=bond">bond</a>
+                              <a class="item" href="/etf-summary-class?class=alternative">alternative</a>
+                              <a class="item" href="/etf-summary-class?class=currency">currency</a>
+                              <a class="item" href="/etf-summary-class?class=commodity">commodity</a>
+                              <a class="item" href="/etf-summary-class?class=sector">sector</a>
+                          </div>
+                    </div>
+                      
+
+                    <div class="item">
+                          <i class="dropdown icon"></i>
+                          Quarterly
+                          <div class="menu">
+                              <a class="item" href="/etf-return-class?class=domestic">domestic</a>
+                              <a class="item" href="/etf-return-class?class=allocation">allocation</a>
+                              <a class="item" href="/etf-return-class?class=international">international</a>
+                              <a class="item" href="/etf-return-class?class=country">country</a>
+                              <a class="item" href="/etf-return-class?class=bond">bond</a>
+                              <a class="item" href="/etf-return-class?class=alternative">alternative</a>
+                              <a class="item" href="/etf-return-class?class=currency">currency</a>
+                              <a class="item" href="/etf-return-class?class=commodity">commodity</a>
+                              <a class="item" href="/etf-return-class?class=sector">sector</a>
+                              <a class="item" href="/etf-return-tracked">Tracked</a>
+                              <a class="item" href="/etf-return-relevant">Relevant</a>
+                              <a class="item" href="/etf-return-owned">Owned</a>
+                          </div>
+                    </div>
+                      
+                    <div class="item">
+                          <i class="dropdown icon"></i>
+                          Signals
+                          <div class="menu">
+                              <a class="item" href="/etf-signal-class?class=domestic">domestic</a>
+                              <a class="item" href="/etf-signal-class?class=allocation">allocation</a>
+                              <a class="item" href="/etf-signal-class?class=international">international</a>
+                              <a class="item" href="/etf-signal-class?class=country">country</a>
+                              <a class="item" href="/etf-signal-class?class=bond">bond</a>
+                              <a class="item" href="/etf-signal-class?class=alternative">alternative</a>
+                              <a class="item" href="/etf-signal-class?class=currency">currency</a>
+                              <a class="item" href="/etf-signal-class?class=commodity">commodity</a>
+                              <a class="item" href="/etf-signal-class?class=sector">sector</a>
+                              <a class="item" href="/etf-signal-tracked">Tracked</a>
+                              <a class="item" href="/etf-signal-relevant">Relevant</a>
+                              <a class="item" href="/etf-signal-owned">Owned</a>
+                          </div>
+                    </div>
+                      
+                </div>
+            </div>
+
+              <div class="ui simple dropdown item">
+                  Mutual Fund
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+
+                      <div class="item">
+                          <i class="dropdown icon"></i>
+                          List
+                          <div class="menu">
+                              <a class="item" href="/mf-list-owned">Owned</a>
+                              <a class="item" href="/mf-list-tracked">Tracked</a>
+                              <a class="item" href="/mf-list-relevant">Relevant</a>
+                              <a class="item" href="/mf-list-all">All</a>
+                          </div>
+                      </div>
+
+                      <div class="item">
+                          <i class="dropdown icon"></i>
+                          Summary
+                          <div class="menu">
+                              <a class="item" href="/mf-summary-all">all</a>
+                              <a class="item" href="/mf-summary-class?class=domestic">domestic</a>
+                              <a class="item" href="/mf-summary-class?class=allocation">allocation</a>
+                              <a class="item" href="/mf-summary-class?class=international">international</a>
+                              <a class="item" href="/mf-summary-class?class=country">country</a>
+                              <a class="item" href="/mf-summary-class?class=bond">bond</a>
+                              <a class="item" href="/mf-summary-class?class=alternative">alternative</a>
+                              <a class="item" href="/mf-summary-class?class=currency">currency</a>
+                              <a class="item" href="/mf-summary-class?class=commodity">commodity</a>
+                              <a class="item" href="/mf-summary-class?class=sector">sector</a>
+                          </div>
+                      </div>
+                      
+
+                      <div class="item">
+                          <i class="dropdown icon"></i>
+                          Quarterly
+                          <div class="menu">
+                              <a class="item" href="/mf-return-class?class=domestic">domestic</a>
+                              <a class="item" href="/mf-return-class?class=allocation">allocation</a>
+                              <a class="item" href="/mf-return-class?class=international">international</a>
+                              <a class="item" href="/mf-return-class?class=country">country</a>
+                              <a class="item" href="/mf-return-class?class=bond">bond</a>
+                              <a class="item" href="/mf-return-class?class=alternative">alternative</a>
+                              <a class="item" href="/mf-return-class?class=currency">currency</a>
+                              <a class="item" href="/mf-return-class?class=commodity">commodity</a>
+                              <a class="item" href="/mf-return-class?class=sector">sector</a>
+                              <a class="item" href="/mf-return-owned">Owned</a>
+                              <a class="item" href="/mf-return-tracked">Tracked</a>
+                              <a class="item" href="/mf-return-relevant">Relevant</a>
+                          </div>
+                      </div>
+                      
+                      <div class="item">
+                          <i class="dropdown icon"></i>
+                          Signals
+                          <div class="menu">
+                              <a class="item" href="/mf-signal-class?class=domestic">domestic</a>
+                              <a class="item" href="/mf-signal-class?class=allocation">allocation</a>
+                              <a class="item" href="/mf-signal-class?class=international">international</a>
+                              <a class="item" href="/mf-signal-class?class=country">country</a>
+                              <a class="item" href="/mf-signal-class?class=bond">bond</a>
+                              <a class="item" href="/mf-signal-class?class=alternative">alternative</a>
+                              <a class="item" href="/mf-signal-class?class=currency">currency</a>
+                              <a class="item" href="/mf-signal-class?class=commodity">commodity</a>
+                              <a class="item" href="/mf-signal-class?class=sector">sector</a>
+                              <a class="item" href="/mf-signal-owned">Owned</a>
+                              <a class="item" href="/mf-signal-tracked">Tracked</a>
+                              <a class="item" href="/mf-signal-relevant">Relevant</a>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+
+
+
+    <div class="ui main text container">
+      
+        <form class="ui form" action="/etfdetail" target="_blank">
+            <div class="field">
+                <label>ETF</label>
+                <input name="symbol" type="text"></input>
+            </div>
+            <button class="ui button" type="submit">Submit</button>
+        </form>
+          
+        <form class="ui form" action="/mfdetail" target="_blank">
+            <div class="field">
+                <label>Fund</label>
+                <input name="symbol" type="text"></input>
+            </div>
+            <button class="ui button" type="submit">Submit</button>
+        </form>
+          
+        <div class="oops">Oops, 504!</div>
+        <div class="message">Something did not respond fast enough,
+            <br>that's all we know...</br>
+        </div>
+         
+    </div>
+
+
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+          <span>&copy; Micro Well 2017</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

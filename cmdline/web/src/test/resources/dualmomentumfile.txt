@@ -1,0 +1,4 @@
+aapl, Apple Stock
+ivv, S&P 500
+qqq, Nasdaq 100
+

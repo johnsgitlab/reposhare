@@ -1,0 +1,88 @@
+package com.jpw.raptor.service;
+
+import com.jpw.raptor.algorithm.EquityPerformance;
+import com.jpw.raptor.domain.quote.QuoteDAO;
+import com.jpw.raptor.model.Quote;
+import com.jpw.raptor.model.Rp;
+import com.jpw.raptor.model.RelativePerformanceModel;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.sql.DataSource;
+
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by john on 8/2/18.
+ */
+@SpringBootApplication(scanBasePackages = "com.jpw.raptor")
+public class PerformanceServiceTest implements CommandLineRunner  {
+
+
+    @Autowired
+    QuoteDAO quoteTbl;
+
+    // Main loop
+    @Override
+    public void run(String... args) throws Exception {
+
+        System.out.println();
+        System.out.println("***************  Hello  *******************");
+        System.out.println();
+
+        String validDate = "2018-01-01";
+
+        PerformanceService ps           = new PerformanceService();
+        EquityPerformance  ep           = new EquityPerformance();
+        FactorService      fs           = new FactorService();
+
+        System.out.println("Factor Service");
+fs.etfListFactorsAll();
+        System.out.println("Factor Service");
+
+
+        List<RelativePerformance>       refPerf        = null;
+        List<RelativePerformance>       equityPerf     = null;
+        List<RelativePerformanceModel>  model          = null;
+
+        model = ps.getRelativePerformance("IVV", "FCNTX", validDate);
+
+        List<Quote> refQuotes      = quoteTbl.getForPerformance("IVV", validDate);
+        refPerf        = ep.computeRelativePerformance(refQuotes);
+
+        List<Quote> equityQuotes   = quoteTbl.getForPerformance("FCNTX", validDate);
+        equityPerf     = ep.computeRelativePerformance(equityQuotes);
+
+        model          = ep.computeRelativePerformanceModel(refPerf, equityPerf);
+
+        System.out.println("***************  Good bye  *******************");
+        System.out.println();
+
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        //disabled banner, don't want to see the spring logo
+        //SpringApplication app = new SpringApplication(IngestApplication.class);
+        //app.setBannerMode(Banner.Mode.OFF);
+        //app.run(args);
+        System.exit(SpringApplication
+                .exit(SpringApplication.run(PerformanceServiceTest.class, args)));
+    }
+
+
+}
+

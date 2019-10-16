@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+<groupId>com.jpw.raptor.lib</groupId>
+<artifactId>lib</artifactId>
+<packaging>jar</packaging>
+<version>1.0-SNAPSHOT</version>
+
+<parent>
+<groupId>com.jpw.raptor</groupId>
+<artifactId>raptor</artifactId>
+<version>1.0-SNAPSHOT</version>
+</parent>
+
+<properties>
+</properties>
+
+<modules>
+</modules>
+    
+<dependencies>
+
+<!-- Springboot test -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-test</artifactId>
+<version>${spring.boot.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- Junit -->
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>${junit.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- logging -->
+<dependency>
+<groupId>org.slf4j</groupId>
+<artifactId>slf4j-api</artifactId>
+<version>${slf4j-api.version}</version>
+</dependency>
+
+<!-- Activemq -->
+<dependency>
+<groupId>org.apache.activemq</groupId>
+<artifactId>activemq-all</artifactId>
+<version>${activemq.all.version}</version>
+</dependency>
+
+<!-- Lombok -->
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>${lombok.version}</version>
+<scope>provided</scope>
+</dependency>
+
+</dependencies>
+
+<build>
+<plugins>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+</plugin>
+
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<executions>
+<execution>
+<goals>
+<goal>prepare-agent</goal>
+</goals>
+</execution>
+<!-- attached to Maven test phase -->
+<execution>
+<id>report</id>
+<phase>test</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+
+<plugin>
+<groupId>org.sonarsource.scanner.maven</groupId>
+<artifactId>sonar-maven-plugin</artifactId>
+</plugin>
+
+</plugins>
+</build>
+
+</project>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<modelVersion>4.0.0</modelVersion>
+
+<groupId>com.jpw.raptor.cmdline.split</groupId>
+<artifactId>split</artifactId>
+<packaging>jar</packaging>
+<version>1.0-SNAPSHOT</version>
+
+<parent>
+<groupId>com.jpw.raptor.cmdline</groupId>
+<artifactId>cmdline</artifactId>
+<version>1.0-SNAPSHOT</version>
+</parent>
+
+<properties>
+</properties>
+
+<modules>
+</modules>
+    
+<dependencies>
+
+<!-- Springboot -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter</artifactId>
+<version>${spring.boot.version}</version>
+</dependency>
+
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-properties-migrator</artifactId>
+<scope>runtime</scope>
+</dependency>
+
+<!-- Springboot test -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-test</artifactId>
+<version>${spring.boot.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- Junit -->
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>${junit.version}</version>
+<scope>test</scope>
+</dependency>
+
+<!-- logging -->
+<dependency>
+<groupId>org.slf4j</groupId>
+<artifactId>slf4j-api</artifactId>
+<version>${slf4j-api.version}</version>
+</dependency>
+
+<!-- Data structures -->
+<dependency>
+<groupId>com.jpw.raptor.model</groupId>
+<artifactId>model</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+
+<!-- Data structures -->
+<dependency>
+<groupId>com.jpw.raptor.lib</groupId>
+<artifactId>lib</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+
+<!-- Algorithms -->
+<dependency>
+<groupId>com.jpw.raptor.algorithm</groupId>
+<artifactId>algorithm</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+
+<!-- Database access -->
+<dependency>
+<groupId>com.jpw.raptor.jdbc</groupId>
+<artifactId>jdbc</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+
+<!-- Apache commons math library -->
+<dependency>
+<groupId>org.apache.commons</groupId>
+<artifactId>commons-math3</artifactId>
+<version>${commons.math3.version}</version>
+</dependency>
+
+<!-- GSON -->
+<dependency>
+<groupId>com.google.code.gson</groupId>
+<artifactId>gson</artifactId>
+<version>${gson.version}</version>
+</dependency>
+
+<!-- Lombok -->
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>${lombok.version}</version>
+<scope>provided</scope>
+</dependency>
+
+<!-- command line parameters -->
+<dependency>
+<groupId>com.beust</groupId>
+<artifactId>jcommander</artifactId>
+<version>${jcommander.version}</version>
+</dependency>
+
+</dependencies>
+
+<build>
+<plugins>
+
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+</plugin>
+
+
+<plugin>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<executions>
+<execution>
+<goals>
+<goal>prepare-agent</goal>
+</goals>
+</execution>
+<!-- attached to Maven test phase -->
+<execution>
+<id>report</id>
+<phase>test</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+
+<plugin>
+<groupId>org.sonarsource.scanner.maven</groupId>
+<artifactId>sonar-maven-plugin</artifactId>
+</plugin>
+
+</plugins>
+</build>
+
+</project>
+
