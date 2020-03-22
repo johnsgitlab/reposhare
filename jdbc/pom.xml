@@ -75,9 +75,9 @@
 
 <!-- Postgres JDBC driver -->
 <dependency>
-<groupId>org.jumpmind.symmetric.jdbc</groupId>
+<groupId>org.postgresql</groupId>
 <artifactId>postgresql</artifactId>
-<version>9.2-1002-jdbc4</version>
+<version>42.2.6</version>
 </dependency>
 
 <!-- Postgres containers for Database testing -->

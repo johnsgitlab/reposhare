@@ -2,19 +2,46 @@ package com.jpw.raptor.model;
 
 import lombok.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Index;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.IdClass;
+import javax.persistence.EmbeddedId;
+
 import java.util.Date;
 
 /**
  * Created by john on 4/2/17.
  */
 @Data
+
+@Entity
+@IdClass(QuoteId.class)
+@Table(name = "quote_tbl")
 public class Quote  {
 
+    @EmbeddedId
     protected QuoteId id;
+
+    @Column(name = "open", columnDefinition="")
     protected double  open;
+
+    @Column(name = "high", columnDefinition="")
     protected double  high;
+
+    @Column(name = "low", columnDefinition="")
     protected double  low;
+
+    @Column(name = "close", columnDefinition="")
     protected double  close;
+
+    @Column(name = "volume", columnDefinition="")
     protected long    volume;
 
     public Quote() {

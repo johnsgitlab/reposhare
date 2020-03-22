@@ -40,6 +40,12 @@ public class FundDAO implements FundInterface {
     private DataSource      dataSource;
     private JdbcTemplate    jdbcTemplate;
 
+    public void close() {
+        try {
+            jdbcTemplate.getDataSource().getConnection().close();
+        } catch ( SQLException ex) {}
+    }
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;

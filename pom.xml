@@ -19,7 +19,7 @@
 <junit.version>4.11</junit.version>
 <sonar.version>3.6.0.1398</sonar.version>
 <jacoco.version>0.8.4</jacoco.version>
-<lombok.version>1.16.16</lombok.version>
+<lombok.version>1.18.12</lombok.version>
 <gson.version>2.6.2</gson.version>
 <guava.version>22.0</guava.version>
 <commons.collections.version>3.2.1</commons.collections.version>
@@ -55,13 +55,12 @@
 
 <modules>
 <module>model</module>
+<module>hibernate</module>
 <module>jdbc</module>
-<module>search</module>
 <module>algorithm</module>
 <module>lib</module>
 <module>service</module>
 <module>analytic</module>
-<module>scrape</module>
 <module>testing</module>
 <module>cmdline</module>
 </modules>

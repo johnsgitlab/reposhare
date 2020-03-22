@@ -21,14 +21,7 @@
 
 
 <modules>
-<module>add</module>
 <module>ingest</module>
-<module>queuedump</module>
-<module>scrapequeue</module>
-<module>scrapeweb</module>
-<module>split</module>
-<module>merge</module>
-<module>summary</module>
 <module>rest</module>
 <module>web</module>
 </modules>

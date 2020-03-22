@@ -5,8 +5,8 @@
 
 <modelVersion>4.0.0</modelVersion>
 
-<groupId>com.jpw.raptor.model</groupId>
-<artifactId>model</artifactId>
+<groupId>com.jpw.raptor.hibernate</groupId>
+<artifactId>hibernate</artifactId>
 <packaging>jar</packaging>
 <version>1.0-SNAPSHOT</version>
 
@@ -23,13 +23,6 @@
 </modules>
     
 <dependencies>
-
-    <!-- Springboot data jpa -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-        <version>${spring.boot.version}</version>
-    </dependency>
 
 <!-- Springboot test -->
 <dependency>
@@ -54,6 +47,54 @@
 <version>${slf4j-api.version}</version>
 </dependency>
 
+<!-- Springboot data jpa -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-data-jpa</artifactId>
+<version>${spring.boot.version}</version>
+</dependency>
+
+    <!-- springboot jdbc exclude the default Tomcat connection pool -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jdbc</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jdbc</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+<!-- Data structures -->
+<dependency>
+<groupId>com.jpw.raptor.model</groupId>
+<artifactId>model</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+
+<!-- HikariCP connection pool management  -->
+<dependency>
+<groupId>com.zaxxer</groupId>
+<artifactId>HikariCP</artifactId>
+<version>2.6.1</version>
+</dependency>
+
+<!-- Postgres JDBC driver -->
+<dependency>
+<groupId>org.postgresql</groupId>
+<artifactId>postgresql</artifactId>
+<version>42.2.6</version>
+</dependency>
+
+
+<!-- Apache commons math library -->
+<dependency>
+<groupId>org.apache.commons</groupId>
+<artifactId>commons-math3</artifactId>
+<version>${commons.math3.version}</version>
+</dependency>
+
 <!-- GSON -->
 <dependency>
 <groupId>com.google.code.gson</groupId>
@@ -69,13 +110,6 @@
 <scope>provided</scope>
 </dependency>
 
-<!-- org.apache.commons -->
-<dependency>
-<groupId>org.apache.commons</groupId>
-<artifactId>commons-text</artifactId>
-<version>${commons.text.version}</version>
-</dependency>
-
 </dependencies>
 
 <build>
@@ -84,32 +118,9 @@
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>
 <artifactId>maven-compiler-plugin</artifactId>
+<version>${maven.compiler.version}</version>
 </plugin>
 
-<plugin>
-<groupId>org.jacoco</groupId>
-<artifactId>jacoco-maven-plugin</artifactId>
-<executions>
-<execution>
-<goals>
-<goal>prepare-agent</goal>
-</goals>
-</execution>
-<!-- attached to Maven test phase -->
-<execution>
-<id>report</id>
-<phase>test</phase>
-<goals>
-<goal>report</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
-
-<plugin>
-<groupId>org.sonarsource.scanner.maven</groupId>
-<artifactId>sonar-maven-plugin</artifactId>
-</plugin>
 
 </plugins>
 </build>

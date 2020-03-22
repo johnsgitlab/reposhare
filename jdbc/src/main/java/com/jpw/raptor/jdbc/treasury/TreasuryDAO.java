@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 import java.util.List;
@@ -32,6 +33,12 @@ public class TreasuryDAO implements TreasuryInterface {
 
     private DataSource      dataSource;
     private JdbcTemplate    jdbcTemplate;
+
+    public void close() {
+        try {
+            jdbcTemplate.getDataSource().getConnection().close();
+        } catch ( SQLException ex) {}
+    }
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
