@@ -29,8 +29,7 @@ import java.util.Date;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "row_id", columnDefinition="")
+    @Column(name = "row_id", unique=true, nullable = false,  columnDefinition="")
     private long       rowId;
 
     @Temporal(TemporalType.DATE)

@@ -1,1 +1,0 @@
-/home/repogit/schemas/Etf.sql

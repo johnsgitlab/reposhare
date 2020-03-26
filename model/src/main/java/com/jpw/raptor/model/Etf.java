@@ -4,12 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.persistence.Index;
 
 import java.util.Date;
@@ -33,7 +28,7 @@ import java.util.Date;
 public class Etf {
 
     @Id
-    @Column(name = "symbol", columnDefinition="character varying(10) NOT NULL")
+    @Column(name = "symbol", unique=true, nullable = false,  columnDefinition="character varying(10) NOT NULL")
     private String     symbol;
 
     @Column(name = "name", columnDefinition="")
@@ -191,7 +186,7 @@ public class Etf {
     @Column(name = "median_market_cap", columnDefinition="")
     private double     medianMarketCap;
 
-    @Column(name = "bond_marity", columnDefinition="")
+    @Column(name = "bond_maturity", columnDefinition="")
     private double     bondMaturity;
 
     @Column(name = "bond_duration", columnDefinition="")
@@ -248,25 +243,25 @@ public class Etf {
     @Column(name = "top_holdings", columnDefinition="")
     private String     topHoldings;
 
-    @Column(name = "r_sqared", columnDefinition="")
+    @Column(name = "r_squared", columnDefinition="")
     private double     rSquared;
 
     @Column(name = "deviation", columnDefinition="")
     private double     deviation;
 
-    @Column(name = "lipper_total", columnDefinition="")
+    @Column(name = "lipper_total", columnDefinition="", nullable=true)
     private int        lipperTotal;
 
-    @Column(name = "lipper_consistent", columnDefinition="")
+    @Column(name = "lipper_consistent", columnDefinition="", nullable=true)
     private int        lipperConsistent;
 
-    @Column(name = "lipper_preservation", columnDefinition="")
+    @Column(name = "lipper_preservation", columnDefinition="", nullable=true)
     private int        lipperPreservation;
 
-    @Column(name = "lipper_tax", columnDefinition="")
+    @Column(name = "lipper_tax", columnDefinition="", nullable=true)
     private int        lipperTax;
 
-    @Column(name = "lipper_expense", columnDefinition="")
+    @Column(name = "lipper_expense", columnDefinition="", nullable=true)
     private int        lipperExpense;
 
 

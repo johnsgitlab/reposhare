@@ -41,7 +41,7 @@ import java.util.Date;
 public class Fund  {
 
     @Id
-    @Column(name = "symbol", columnDefinition="")
+    @Column(name = "symbol", unique=true, nullable = false, columnDefinition="")
     private String     symbol;
 
     @Column(name = "category", columnDefinition="")
@@ -83,7 +83,7 @@ public class Fund  {
     @Column(name = "deviation", columnDefinition="")
     private double     deviation;
 
-    @Column(name = "r_sqared", columnDefinition="")
+    @Column(name = "r_squared", columnDefinition="")
     private double     rSquared;
 
     @Column(name = "morning_stars", columnDefinition="")
@@ -217,7 +217,7 @@ public class Fund  {
     @Column(name = "median_market_cap", columnDefinition="")
     private double     medianMarketCap;
 
-    @Column(name = "bond_marity", columnDefinition="")
+    @Column(name = "bond_maturity", columnDefinition="")
     private double     bondMaturity;
 
     @Column(name = "bond_duration", columnDefinition="")

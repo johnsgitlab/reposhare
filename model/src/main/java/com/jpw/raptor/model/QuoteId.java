@@ -21,18 +21,14 @@ import java.util.Date;
 /**
  * Created by john on 4/2/17.
  */
-@Data
-@NoArgsConstructor
-
-@Embeddable
+@Getter
+@Setter
 public class QuoteId implements Serializable {
 
-    @Column(name = "symbol", columnDefinition="")
-    private String  symbol;
+    protected String  symbol;
+    protected Date    date;
 
-    @Column(name = "date_tx", columnDefinition="")
-    @Temporal(TemporalType.DATE)
-    private Date    date;
+    public QuoteId() {}
 
     public QuoteId(String symbol, Date date) {
         this.symbol = symbol;

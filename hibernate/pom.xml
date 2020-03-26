@@ -87,6 +87,12 @@
 <version>42.2.6</version>
 </dependency>
 
+    <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>1.13.0</version>
+        <scope>test</scope>
+    </dependency>
 
 <!-- Apache commons math library -->
 <dependency>

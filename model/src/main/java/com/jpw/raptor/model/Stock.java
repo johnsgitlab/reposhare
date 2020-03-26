@@ -27,11 +27,11 @@ import java.util.Date;
 @Table(
         name = "stock_tbl",
         indexes = {
-                @Index(name = "idx_stock_dow", columnList = "dow"),
+                @Index(name = "idx_stock_dow", columnList = "dow_index"),
                 @Index(name = "idx_stock_industry", columnList = "industry"),
-                @Index(name = "idx_stock_russell", columnList = "russell"),
+                @Index(name = "idx_stock_russell", columnList = "russell_index"),
                 @Index(name = "idx_stock_sector", columnList = "sector"),
-                @Index(name = "idx_stock_sp", columnList = "sp"),
+                @Index(name = "idx_stock_sp", columnList = "sp_index"),
                 @Index(name = "idx_stock_tracks", columnList = "tracks")
         }
 )
@@ -208,7 +208,7 @@ public class Stock {
     @Column(name = "three_years", columnDefinition="")
     private double     threeYears;      // 750
 
-    @Column(name = "last_update", columnDefinition="")
+    @Column(name = "overview", columnDefinition="")
     private String      overview;           // summary profile longBusinessSummary
 
     protected void init() {

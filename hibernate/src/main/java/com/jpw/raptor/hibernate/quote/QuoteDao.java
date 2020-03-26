@@ -12,8 +12,6 @@ import java.util.List;
 
 public interface QuoteDao extends CrudRepository<Quote, QuoteId> {
 
-    //public int sqlScript(String script);
-
     /*
      to Add or Update
      QuoteRepository.save(Quote)

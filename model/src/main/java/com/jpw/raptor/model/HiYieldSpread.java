@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 
+import javax.persistence.*;
+import javax.persistence.Index;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,9 +17,18 @@ import java.util.Date;
  * Created by john on 12/6/18.
  */
 @Data
+@Entity
+@Table(
+        name = "hi_yield_spread_tbl",
+        indexes = {@Index(name = "idx_hi_yield_date", columnList = "date_tx")}
+)
 public class HiYieldSpread {
 
+    @Id
+    @Column(name = "date_tx", unique=true, nullable = false,  columnDefinition="")
     protected Date   date;
+
+    @Column(name = "spread", columnDefinition="")
     protected double spread;
 
     // Constructor

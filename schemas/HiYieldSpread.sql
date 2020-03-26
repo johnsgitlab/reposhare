@@ -2,7 +2,7 @@
 CREATE TABLE hi_yield_spread_tbl
 (
   date_tx date NOT NULL,
-  spread  double precision,
+  spread  double precision DEFAULT '-9999.0'::numeric,
   primary key (date_tx)
 )
 WITH (

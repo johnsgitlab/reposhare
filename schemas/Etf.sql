@@ -23,12 +23,12 @@ CREATE TABLE etf_tbl
   dividend_yield double precision DEFAULT '-9999.0'::numeric,
 
   morning_rating character varying(126),
-  morning_stars integer,
-  lipper_total integer,
-  lipper_consistent integer,
-  lipper_preservation integer,
-  lipper_tax integer,
-  lipper_expense integer,
+  morning_stars integer DEFAULT '-9999'::numeric,
+  lipper_total integer DEFAULT '-9999'::numeric,
+  lipper_consistent integer DEFAULT '-9999'::numeric,
+  lipper_preservation integer DEFAULT '-9999'::numeric,
+  lipper_tax integer DEFAULT '-9999'::numeric,
+  lipper_expense integer DEFAULT '-9999'::numeric,
 
   ytd double precision DEFAULT '-9999.0'::numeric,
   one_day double precision DEFAULT '-9999.0'::numeric,

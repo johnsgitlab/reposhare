@@ -10,9 +10,10 @@ CREATE TABLE PUBLIC.stock_tbl
     
   sector character varying(126),
   industry character varying(126),
-  tracks character varying(126),
   exchange character varying(126),
 
+  tracks character varying(126),
+  date_tx date,
   last_update date,
 
   recommendations integer DEFAULT '0'::numeric,
@@ -55,15 +56,16 @@ CREATE TABLE PUBLIC.stock_tbl
   return_on_equity double precision DEFAULT '0.0'::numeric,
   total_cash_per_share double precision DEFAULT '0.0'::numeric,
   
-  date_tx date,
-  ytd double precision DEFAULT '0.0'::numeric,
-  one_day double precision DEFAULT '0.0'::numeric,
-  one_week double precision DEFAULT '0.0'::numeric,
-  two_weeks double precision DEFAULT '0.0'::numeric,
-  four_weeks double precision DEFAULT '0.0'::numeric,
-  three_months double precision DEFAULT '0.0'::numeric,
-  one_year double precision DEFAULT '0.0'::numeric,
-  three_years double precision DEFAULT '0.0'::numeric,
+  
+  ytd double precision DEFAULT '-9999.0'::numeric,
+  one_day double precision DEFAULT '-9999.0'::numeric,
+  one_week double precision DEFAULT '-9999.0'::numeric,
+  two_weeks double precision DEFAULT '-9999.0'::numeric,
+  four_weeks double precision DEFAULT '-9999.0'::numeric,
+  three_months double precision DEFAULT '-9999.0'::numeric,
+  one_year double precision DEFAULT '-9999.0'::numeric,
+  three_years double precision DEFAULT '-9999.0'::numeric,
+
   overview TEXT,
  
   CONSTRAINT stock_pkey PRIMARY KEY (symbol)

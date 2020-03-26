@@ -19,15 +19,21 @@ import java.util.Date;
 /**
  * Created by john on 4/2/17.
  */
-@Data
-
+@Getter
+@Setter
 @Entity
 @IdClass(QuoteId.class)
 @Table(name = "quote_tbl")
 public class Quote  {
 
-    @EmbeddedId
-    protected QuoteId id;
+    @Id
+    @Column(name = "symbol", columnDefinition="")
+    protected String  symbol;
+
+    @Id
+    @Column(name = "date_tx", columnDefinition="")
+    @Temporal(TemporalType.DATE)
+    protected Date    date;
 
     @Column(name = "open", columnDefinition="")
     protected double  open;
@@ -44,22 +50,16 @@ public class Quote  {
     @Column(name = "volume", columnDefinition="")
     protected long    volume;
 
-    public Quote() {
-        id = new QuoteId();
-    }
+    public Quote() {}
 
     public Quote (String symbol, Date date) {
-        QuoteId id = new QuoteId();
-        id.setSymbol(symbol);
-        id.setDate(date);
-        this.id = id;
+        this.symbol = symbol;
+        this.date = date;
     }
 
     public Quote (String symbol, Date date, double open, double high, double low, double close, long volume) {
-        QuoteId id  = new QuoteId();
-        id.setSymbol(symbol);
-        id.setDate(date);
-        this.id     = id;
+        this.symbol = symbol;
+        this.date   = date;
         this.open   = open;
         this.high   = high;
         this.low    = low;
@@ -67,9 +67,4 @@ public class Quote  {
         this.volume = volume;
     }
 
-    public String getSymbol()           { return id.getSymbol(); }
-    public void   setSymbol(String v)   { id.setSymbol(v); }
-
-    public Date   getDate()             { return id.getDate(); }
-    public void   setDate(Date v)       { id.setDate(v); }
 }

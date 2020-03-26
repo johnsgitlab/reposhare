@@ -24,7 +24,7 @@ import java.util.Date;
 public class Index {
 
     @Id
-    @Column(name = "symbol", columnDefinition="")
+    @Column(name = "symbol", unique=true, nullable = false,  columnDefinition="character varying(10) NOT NULL")
     private String     symbol;
 
     @Column(name = "name", columnDefinition="")

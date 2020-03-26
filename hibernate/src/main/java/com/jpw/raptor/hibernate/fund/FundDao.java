@@ -6,9 +6,11 @@ import com.jpw.raptor.model.Fund;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -41,6 +43,8 @@ public interface FundDao extends CrudRepository<Fund, String> {
      Optional<Fund> = FundRepository.findOne(String symbol);
      */
 
+    @Transactional
+    @Modifying
     @Query(
             value = "INSERT INTO fund_tbl (symbol) values (?1)",
             nativeQuery = true )

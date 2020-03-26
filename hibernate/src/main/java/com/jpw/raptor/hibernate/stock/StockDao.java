@@ -2,13 +2,14 @@ package com.jpw.raptor.hibernate.stock;
 
 import com.jpw.raptor.model.Etf;
 import com.jpw.raptor.model.Stock;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -17,8 +18,6 @@ import java.util.List;
  * Created by John on 10/1/2017.
  */
 public interface StockDao extends CrudRepository<Stock, String>{
-
-    //public int sqlScript(String script);
 
     //public List<String> getScrapeSymbols(String select, String symbol);
 
@@ -51,6 +50,8 @@ public interface StockDao extends CrudRepository<Stock, String>{
         String endDate   = String.valueOf(year + 1) + "-01-01";
     */
 
+    @Transactional
+    @Modifying
     @Query(
             value = "INSERT INTO stock_tbl (symbol, name, sp_index, dow_index, russell_index) values (?1,?2,?3,?4,?5)",
             nativeQuery = true )
