@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by John on 10/1/2017.
  */
+@Repository
 public interface TreasuryDao extends CrudRepository<Treasury, Date> {
 
     //public int sqlScript(String script);
@@ -41,19 +42,19 @@ public interface TreasuryDao extends CrudRepository<Treasury, Date> {
      */
 
     @Query(
-            value = "SELECT * FROM treasury_tbl WHERE date+tx=?",
+            value = "SELECT * FROM treasury_tbl WHERE date_tx=?1",
             nativeQuery = true)
-    public Treasury get(String date);
+    public Treasury get(Date date);
 
     @Query(
-            value = "SELECT * FROM treasury_tbl ORDER BY date_tx DESC LIMIT 1",
+            value = "SELECT * FROM treasury_tbl ORDER BY date_tx DESC LIMIT 2",
             nativeQuery = true)
-    public Treasury getLast();
+    public List<Treasury> getLast();
 
     @Query(
             value = "SELECT * FROM treasury_tbl ORDER BY date_tx DESC",
             nativeQuery = true)
-    public Treasury getAll();
+    public List<Treasury> getAll();
 
 }
 

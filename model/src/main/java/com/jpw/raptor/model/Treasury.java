@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 
+import javax.persistence.*;
+import javax.persistence.Index;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,20 +17,51 @@ import java.util.Date;
  * Created by john on 12/6/18.
  */
 @Data
+@Entity
+@Table(
+        name = "treasury_tbl",
+        indexes = {@Index(name = "idx_treasury_date", columnList = "date_tx")}
+)
 public class Treasury {
 
+    @Id
+    @Column(name = "date_tx", unique=true, nullable = false,  columnDefinition="")
     protected Date   date;
+
+    @Column(name = "one_month", columnDefinition="")
     protected double oneMonth;
+
+    @Column(name = "two_months", columnDefinition="")
     protected double twoMonths;
+
+    @Column(name = "three_months", columnDefinition="")
     protected double threeMonths;
+
+    @Column(name = "six_months", columnDefinition="")
     protected double sixMonths;
+
+    @Column(name = "one_year", columnDefinition="")
     protected double oneYear;
+
+    @Column(name = "two_years", columnDefinition="")
     protected double twoYears;
+
+    @Column(name = "three_years", columnDefinition="")
     protected double threeYears;
+
+    @Column(name = "five_years", columnDefinition="")
     protected double fiveYears;
+
+    @Column(name = "seven_years", columnDefinition="")
     protected double sevenYears;
+
+    @Column(name = "ten_years", columnDefinition="")
     protected double tenYears;
+
+    @Column(name = "twenty_years", columnDefinition="")
     protected double twentyYears;
+
+    @Column(name = "thirty_years", columnDefinition="")
     protected double thirtyYears;
 
     // Constructor

@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Created by John on 10/1/2017.
  */
+@Repository
 public interface StockDao extends CrudRepository<Stock, String>{
 
     //public List<String> getScrapeSymbols(String select, String symbol);
