@@ -1,79 +1,127 @@
-package com.jpw.raptor.hibernate.event;
+package com.jpw.raptor.jdbc.event;
 
-import com.jpw.raptor.hibernate.etf.EtfDao;
-import com.jpw.raptor.hibernate.etf.EtfDaoTest;
-import com.jpw.raptor.hibernate.etf.EtfDaoTestData;
-import com.jpw.raptor.model.Etf;
+import com.jpw.raptor.jdbc.etf.EtfDAO;
+import com.jpw.raptor.jdbc.event.EventDAO;
 import com.jpw.raptor.model.Event;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import com.jpw.raptor.model.Quote;
+import org.junit.*;
+import org.postgresql.ds.PGSimpleDataSource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.testcontainers.containers.PostgreSQLContainer;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@ContextConfiguration(initializers = { EventDaoTest.Initializer.class })
-@EnableJpaRepositories
-@EntityScan( basePackages = {"com.jpw.raptor.model"} )
-public class EventDaoTest {
+/**
+ * Created by john on 5/13/18.
+ */
+public class EventDAOTest {
 
-    @ClassRule
-    public static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:10.11")
-            .withDatabaseName("test-hibernate")
-            .withUsername("sa")
-            .withPassword("sa");
+    EventDAO tbl;
 
+    Event r1;
+    Event r2;
+    Event r3;
+    Event r4;
 
+    static class PostgresResource  {
 
-    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+        // postgres:9.6.8
 
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            TestPropertyValues.of(
-                    "spring.datasource.url=" + postgreSQLContainer.getJdbcUrl(),
-                    "spring.datasource.username=" + postgreSQLContainer.getUsername(),
-                    "spring.datasource.password=" + postgreSQLContainer.getPassword()
-            ).applyTo(configurableApplicationContext.getEnvironment());
+        PostgreSQLContainer postgreSQLContainer;
+        PGSimpleDataSource dataSource;
+
+        public PostgresResource() {
+            postgreSQLContainer = new PostgreSQLContainer("postgres:10.11")
+                     .withDatabaseName("test-jdbc")
+                    .withUsername("sa")
+                    .withPassword("sa");
+
+            postgreSQLContainer.start();
+
+            dataSource = new PGSimpleDataSource();
+            dataSource.setDatabaseName(postgreSQLContainer.getDatabaseName());
+            dataSource.setServerName(postgreSQLContainer.getContainerIpAddress());
+            dataSource.setPortNumber(postgreSQLContainer.getMappedPort(5432));
+            dataSource.setUser(postgreSQLContainer.getUsername());
+            dataSource.setPassword(postgreSQLContainer.getPassword());
 
         }
+
+        public void stop() { postgreSQLContainer.stop(); }
+
+        public PGSimpleDataSource getDataSource () {return dataSource;}
+
     }
 
-    @Autowired
-    private EventDao tbl;
 
-    @Test
-    public void testit() throws Exception {
+    private static PostgresResource myPostgresResource;
+
+    @BeforeClass
+    public static void setUp() throws java.text.ParseException {
+
+        myPostgresResource = new PostgresResource();
+    }
+
+
+    @Before
+    public void setUpTest() throws java.text.ParseException {
 
         // Create test fields
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Event r1 = new Event(1l, sdf.parse("20171101"), "conflict", "sc1", "e1", "d1");
-        Event r2 = new Event(2l, sdf.parse("20171230"), "earnings", "sc2", "e2", "d2");
-        Event r3 = new Event(3l, sdf.parse("20180102"), "economy", "sc3", "e3", "d3");
-        Event r4 = new Event(4l, sdf.parse("20180103"), "fed", "sc4", "e4", "d4");
+        r1 = new Event(1l, sdf.parse("20171101"), "conflict", "sc1", "e1", "d1");
+        r2 = new Event(2l, sdf.parse("20171230"), "earnings", "sc2", "e2", "d2");
+        r3 = new Event(3l, sdf.parse("20180102"), "economy", "sc3", "e3", "d3");
+        r4 = new Event(4l, sdf.parse("20180103"), "fed", "sc4", "e4", "d4");
+
+    }
+
+    @AfterClass
+    public static void tearDown(){
+        myPostgresResource.stop();
+    }
+
+
+
+    @Test
+    public void test00() throws Exception {
+
+        System.out.println("Start");
+
+        // Create connection to docker database
+        tbl = new EventDAO();
+        tbl.setDataSource(myPostgresResource.getDataSource());
+        tbl.postConstruct();
+
+        // Create table for testing
+        File resource;
+        String cmds;
+
+        resource = new ClassPathResource("schema.sql").getFile();
+        cmds = new String(Files.readAllBytes(resource.toPath()));
+        tbl.sqlScript(cmds);
+
+        resource = new ClassPathResource("data.sql").getFile();
+        cmds = new String(Files.readAllBytes(resource.toPath()));
+        tbl.sqlScript(cmds);
 
         // Write 4 records
-        tbl.save(r1);
-        tbl.save(r2);
-        tbl.save(r3);
-        tbl.save(r4);
+        tbl.add(r1);
+        tbl.add(r2);
+        tbl.add(r3);
+        tbl.add(r4);
 
-        // Read and validate the 4 records
         Event rr;
 
+        // Read and validate the 4 records
         rr = tbl.get(r1.getRowId());
         assertEquals(rr.getRowId(),r1.getRowId());
         assertEquals(rr.getDateTx().compareTo(r1.getDateTx()),0);

@@ -33,7 +33,7 @@ public class TreasuryDaoTest {
 
     @ClassRule
     public static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:10.11")
-            .withDatabaseName("test")
+            .withDatabaseName("test-hibernate")
             .withUsername("sa")
             .withPassword("sa");
 
